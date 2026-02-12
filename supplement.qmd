@@ -1,0 +1,777 @@
+---
+title: Supplementary material
+date: last-modified
+execute:
+  echo: false
+format: 
+  html:
+      embed-resources: true
+toc: true
+toc-depth: 2
+toc-location: left
+number-sections: true
+number-depth: 3
+include-in-header:
+  - text: |
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+      $(document).ready(function () {
+        $("input.hideshow").each(function () {
+          this.value = '< hide table';
+          $(this).on("click", function () {
+            let target = $(this).nextAll("table").first();  // find the next table
+            if (target.css("display") === "none") {
+              target.show();
+              this.value = '< hide table';
+            } else {
+              target.hide();
+              this.value = '> show table';
+            }
+          });
+        });
+      });
+      </script>
+
+---
+
+```{r setup, include = FALSE}
+library(kableExtra)
+library(tidyverse)
+library(plotly)
+
+source("./R/utils.R")
+
+dens   <- "density [ind. per 1000 hm²]"
+dens2  <- "density"
+nI     <- "no. of individuals"
+nS     <- "no. of species"
+dist   <- "distance to field margin [m]"
+maize500  <- "prop. of maize within 0.5 km [prop.]"
+woodS500  <- "prop. of AST within 0.5 km [prop.]"
+maize750  <- "prop. of maize within 0.75 km [prop.]"
+woodS750  <- "prop. of AST within 0.75 km [prop.]"
+maize1000  <- "prop. of maize within 1 km [prop.]"
+woodS1000  <- "prop. of AST within 1 km [prop.]"
+weed   <- "weed infestation [prop.]"  
+spec   <- "species"
+year   <- "year"
+jday   <- "decade of the year [10-day intervall]"
+site   <- "study site"
+
+
+```
+
+```{=html}
+<style>body {text-align: justify}</style>
+```
+<!-- this aligns the text to justified text (Blocksatz) -->
+
+# Material and Methods
+
+## Study sites
+```{r, results='asis', echo = F}
+dat.mod <- read.csv("./output/data.csv", encoding = "latin1")
+dat.site <- read.csv("./data/dat_site.csv", encoding = "latin1")
+dat.mod <- dat.mod[dat.mod$species == "Blaumeise",]
+dat.mod$weed_p <- dat.mod$prop_weed/100
+dat.mod$maize_500m <- dat.mod$maize_500m/100
+dat.mod$maize_750m <- dat.mod$maize_750m/100
+dat.mod$maize_1000m <- dat.mod$maize_1000m/100
+dat.mod$woodS_500m <- dat.mod$woodS_500m/100
+dat.mod$woodS_750m <- dat.mod$woodS_750m/100
+dat.mod$woodS_1000m <- dat.mod$woodS_1000m/100
+
+site.sum <- dat.mod %>% group_by(site_short) %>% 
+  summarize(lon = round(mean(lon), 4),
+            lat = round(mean(lat), 4),
+            nets = length(unique(netNr)),
+            e1000 = round(sum(effort)/1000, 1),
+            dist = paste0(round(mean(distance_m), 0), " (", round(min(distance_m), 0), "-", round(max(distance_m), 0), ")"),
+            weed = paste0(round(mean(weed_p), 2), " (", round(min(weed_p), 2), "-", round(max(weed_p), 2), ")"),
+            m500 = paste0(round(mean(maize_500m), 2), " (", round(min(maize_500m), 2), "-", round(max(maize_500m), 2), ")"),
+            #m750 = paste0(round(mean(maize_750m), 2), " (", round(min(maize_750m), 2), "-", round(max(maize_750m), 2), ")"),
+            #m1000 = paste0(round(mean(maize_1000m), 2), " (", round(min(maize_1000m), 2), "-", round(max(maize_1000m), 2), ")"),
+            w500 = paste0(round(mean(woodS_500m), 2), " (", round(min(woodS_500m), 2), "-", round(max(woodS_500m), 2), ")"),
+            #w750 = paste0(round(mean(woodS_750m), 2), " (", round(min(woodS_750m), 2), "-", round(max(woodS_750m), 2), ")"),
+            #w1000 = paste0(round(mean(woodS_1000m), 2), " (", round(min(woodS_1000m), 2), "-", round(max(woodS_1000m), 2), ")")
+            )
+
+## add area_ha
+site.sum <- left_join(site.sum, dat.site[, c("site_short", "area_ha")], by = "site_short")
+
+site.sum <- site.sum[order(site.sum$site_short),]
+
+site.sum$area_ha <- round(site.sum$area_ha, 1)
+
+site.sum <- site.sum[, c("site_short", "lon", "lat", "area_ha", "nets", "e1000", "dist", "weed", "m500", "w500")]
+colnames(site.sum) <- c("site", "lon", "lat", "area [ha]", "nets", "effort", "dist", "weed", "maize", "AST")
+
+kbl(site.sum, caption = "Overview of study <em>sites</em>, including location (<em>lon</em>, <em>lat</em>), <em>area</em>, number of used <em>nets</em> and total <em>effort</em> in 1000 hm², as well as distance to field margin (<em>dist</em>), <em>weed</em> infestation and <em>maize</em> and <em>AST</em> (area covered with shrubs and trees) cover within a 500 m radius (mean (min-max)).",     
+    row.names = F, escape = FALSE) %>%
+  kable_styling(full_width = FALSE, position = "left") %>%
+  scroll_box(width = "900px", height = "750px") %>%
+
+  row_spec(0:nrow(site.sum), extra_css = "font-size:14px;") %>%
+  
+  row_spec(which(1:nrow(site.sum)%%2!=1),
+           background = "#CCCCCC") %>%
+  row_spec(0, extra_css = "border-bottom: 1px solid black;", background = "#CCCCCC") %>%
+  row_spec(nrow(site.sum), extra_css = "border-bottom: 1px solid black;")
+
+```
+
+
+## Effort
+![Overview of annual trapping effort per decade of the year. Numbers in brackets give the total number of sites per year. *For reference: end of July/start of August = decade 21, end of August/start of September = decade 24, end of September/start of October = decade 27, end of October/start of November = decade 30.*](graphs/Effort.png){#fig-eff width="70%"}   
+
+## OSM attributes
+
+```{r, results='asis', echo = F}
+df.osm <- read.csv("./data/OSM_attributes.csv")
+
+# Button must be created inside the same chunk or just before the table output
+# cat('<input type="button" class="hideshow">') # does only halfway work
+
+kbl(df.osm, caption = "OpenStreetMap attributes used for landscape shares (<em>key</em>, <em>value</em>), type of geometry used (<em>points, polygons, multipolygons, lines, multilines</em>), assigned <em>landscape</em>, and <em>buffer</em> in m used to create polygons from point, line and mutliline objects.",     
+    row.names = F, escape = FALSE) %>%
+  kable_styling(full_width = FALSE, position = "left") %>%
+  scroll_box(width = "900px", height = "750px") %>%
+
+  row_spec(0:nrow(df.osm), extra_css = "font-size:14px;") %>%
+
+  row_spec(which(1:nrow(df.osm)%%2!=1),
+           background = "#CCCCCC") %>%
+  row_spec(0, extra_css = "border-bottom: 1px solid black;", background = "#CCCCCC") %>%
+  row_spec(nrow(df.osm), extra_css = "border-bottom: 1px solid black;")
+
+```
+
+## Predictors
+
+```{r}
+
+
+# plot predictor per predictor
+plot2 <- function(x = NULL, y = NULL, color = "year", c.label = year,
+                  data = dat.mod, 
+                  xlab = NULL, ylab = NULL, basesize = 12){
+  
+  data$x     <- data[,x]
+  data$y     <- data[,y]
+  data$color <- as.factor(data[,color])
+  
+  g <- ggplot(data) +
+    # plot points (jittered)
+    geom_point(aes(x = x, y = y, color = color), pch = 1, size = 2) +
+    # define color range of color-variable
+    scale_color_viridis_d(c.label, direction = 1, end = 0.9, option = "inferno", alpha = 0.5) +
+    # axis labels
+    xlab(xlab) +
+    ylab(ylab) +
+    theme_light(base_size = basesize*1.5)
+  
+  return(g)
+}
+```
+
+::: {.panel-tabset}
+
+### distance & maize
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "maize_500m", ylab = maize500)
+```
+
+#### 0.75 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "maize_750m", ylab = maize750)
+```
+
+#### 1 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "maize_1000m", ylab = maize1000)
+```
+
+::::
+
+### distance & AST
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "woodS_500m", ylab = woodS500)
+```
+
+#### 0.75 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "woodS_750m", ylab = woodS750)
+```
+
+#### 1 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "woodS_1000m", ylab = woodS1000)
+```
+
+::::
+  
+### distance & weed
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "weed_p", ylab = weed)
+```
+
+### distance & decade 
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "distance_m", xlab = dist, y = "julian_day", ylab = jday)
+```
+
+### maize & AST
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_500m", xlab = maize500, y = "woodS_500m", ylab = woodS500)
+```
+
+#### 0.75 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_750m", xlab = maize750, y = "woodS_750m", ylab = woodS750)
+```
+
+#### 1 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_1000m", xlab = maize1000, y = "woodS_1000m", ylab = woodS1000)
+```
+
+::::
+
+### maize & weed
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_500m", xlab = maize500, y = "weed_p", ylab = weed)
+```
+
+#### 0.75 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_750m", xlab = maize750, y = "weed_p", ylab = weed)
+```
+
+#### 1 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_1000m", xlab = maize1000, y = "weed_p", ylab = weed)
+```
+
+::::
+
+### maize & decade
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_500m", xlab = maize500, y = "julian_day", ylab = jday)
+```
+
+#### 0.75 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_750m", xlab = maize750, y = "julian_day", ylab = jday)
+```
+
+#### 1 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "maize_1000m", xlab = maize1000, y = "julian_day", ylab = jday)
+```
+
+::::
+
+### AST & weed
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "woodS_500m", xlab = woodS500, y = "weed_p", ylab = weed)
+```
+
+#### 0.75 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "woodS_750m", xlab = woodS750, y = "weed_p", ylab = weed)
+```
+
+#### 1 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "woodS_1000m", xlab = woodS1000, y = "weed_p", ylab = weed)
+```
+
+::::
+
+### AST & decade 
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "woodS_500m", xlab = woodS500, y = "julian_day", ylab = jday)
+```
+
+#### 0.75 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "woodS_750m", xlab = woodS750, y = "julian_day", ylab = jday)
+```
+
+#### 1 km
+```{r, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "woodS_1000m", xlab = woodS1000, y = "julian_day", ylab = jday)
+```
+
+::::
+
+### weed & decade 
+```{r Vwej, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2(x = "weed_p", xlab = weed, y = "julian_day", ylab = jday)
+```
+
+:::
+
+## Trait groups
+```{r, results='asis', echo = F}
+dat.spec <- read.csv("./output/data_Traits.csv", encoding = "latin1")
+dat.spec <- dat.spec[order(dat.spec$species_sci), ]
+dat.spec <- select(dat.spec, -"species")
+colnames(dat.spec) <- c("scientific", "english", "migration", "habitat", "habitat density", "primary lifestyle", "Red List GER")
+
+kbl(dat.spec, caption = "Overview of species trapped in maize fields and their attribution to different trait groups. <em>Habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened</em>",     
+    row.names = F, escape = FALSE) %>%
+  kable_styling(full_width = FALSE, position = "left") %>%
+  scroll_box(width = "900px", height = "750px") %>%
+
+  row_spec(0:nrow(dat.spec), extra_css = "font-size:14px;") %>%
+
+  add_header_above(c("species name" = 2, "trait" = 5)) %>%
+  row_spec(which(1:nrow(dat.spec)%%2!=1),
+           background = "#CCCCCC") %>%
+  row_spec(0, extra_css = "border-bottom: 1px solid black;", background = "#CCCCCC") %>%
+  row_spec(nrow(dat.spec), extra_css = "border-bottom: 1px solid black;")
+
+
+
+```
+
+
+
+# Results
+
+```{r}
+dat.spec  <- read.csv("./data/spec_info.csv", fileEncoding = "latin1")[, c("species", "species_eng")]
+
+f.list <- list.files("./output", pattern = "500m.csv")
+f.list <- f.list[grep("Predictions_m", f.list)]
+
+pp <- list()
+
+for(i in 1:length(f.list)) pp[[i]] <- read.csv(paste0("./output/", f.list[i]), fileEncoding = "latin1")
+pp[[1]] <- left_join(pp[[1]], dat.spec, by = "species")
+pp[[4]]$species <- as.character(pp[[4]]$species)
+
+# plot predictions per predictor
+plot3 <- function(preds = pp, x = NULL, y = "fit", 
+                  xlab = NULL, ylab = "density [ind. per 1000 hm²]", 
+                  basesize = 12, color = NULL, c.label = NULL, NSpec = NULL){
+  preds$x     <- preds[,x]
+  preds$y     <- preds[,y]
+  preds$color <- preds[,color]
+  if(is.null(NSpec)) NSpec <- FALSE
+
+ 
+  # base plot 
+  g <- ggplot() +
+    theme_light(base_size = basesize)
+  
+  # add predictions
+  if(!NSpec){
+    g <- g +
+      
+      geom_line(data = preds, aes(x = x, y = y, color = color), lwd = 1.2) +
+      
+      scale_color_viridis_d(c.label, direction = -1, end = 0.9) +
+    xlab(xlab) +
+    ylab(ylab) +
+    ylim(0, NA)
+  }
+  
+  if(NSpec){
+    g <- g +
+      
+      geom_line(data = preds, aes(x = x, y = y), color = "grey", lwd = 1.2) +
+
+    xlab(xlab) +
+    ylab("number of species") +
+    ylim(0, NA)
+  }
+
+  return(g)
+  
+}
+
+
+```
+
+::: {.panel-tabset}
+
+## species
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[1]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species_eng", c.label = "species")
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species_eng", c.label = "species")
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species_eng", c.label = "species")
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species_eng", c.label = "species")
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species_eng", c.label = "species")
+ggplotly(g)
+```
+::::
+
+## diversity
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[8]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species", c.label = "species", NSpec = TRUE)
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species", c.label = "species", NSpec = TRUE)
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species", c.label = "species", NSpec = TRUE)
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species", c.label = "species", NSpec = TRUE)
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species", c.label = "species", NSpec = TRUE)
+ggplotly(g)
+```
+::::
+
+
+## diet
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[2]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species", c.label = "diet")
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species", c.label = "diet")
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species", c.label = "diet")
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species", c.label = "diet")
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species", c.label = "diet")
+ggplotly(g)
+```
+::::
+
+## habitat
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[3]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species", c.label = "habitat")
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species", c.label = "habitat")
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species", c.label = "habitat")
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species", c.label = "habitat")
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species", c.label = "habitat")
+ggplotly(g)
+```
+::::
+
+## habitat density
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[4]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species", c.label = "habitat density")
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species", c.label = "habitat density")
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species", c.label = "habitat density")
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species", c.label = "habitat density")
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species", c.label = "habitat density")
+ggplotly(g)
+```
+::::
+
+## migration
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[5]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species", c.label = "migration")
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species", c.label = "migration")
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species", c.label = "migration")
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species", c.label = "migration")
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species", c.label = "migration")
+ggplotly(g)
+```
+::::
+
+## lifestyle
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[6]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species", c.label = "lifestyle")
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species", c.label = "lifestyle")
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species", c.label = "lifestyle")
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species", c.label = "lifestyle")
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species", c.label = "lifestyle")
+ggplotly(g)
+```
+::::
+
+## Red List GER
+
+:::: {.panel-tabset}
+
+### maize
+
+```{r}
+tmp <- pp[[7]]
+g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
+           color = "species", c.label = "Red List GER")
+ggplotly(g)
+```
+
+### AST
+
+```{r}
+g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
+           color = "species", c.label = "Red List GER")
+ggplotly(g)
+```
+
+### distance
+```{r}
+g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
+           color = "species", c.label = "Red List GER")
+ggplotly(g)
+```
+
+### weed
+```{r}
+g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
+           color = "species", c.label = "Red List GER")
+ggplotly(g)
+```
+
+### decade
+```{r}
+g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
+           color = "species", c.label = "Red List GER")
+ggplotly(g)
+```
+::::
+
+
+:::
+
+These figures display the predicted bird densities (for species and trait groups) or species diversity (for diversity) for different covariates (proportion of maize, proportion of AST, distance to field margin, weed infestation, decade of the year). The used reference radius is 0.5 km. When predicting for one covariate, other covariates were set to their mean values. The figures are interactive, so you can remove groups by selecting them in the legend or hover across lines to show exact values. _Reference for decade of the year: end of July/start of August = decade 21, end of August/start of September = decade 24, end of September/start of October = decade 27, end of October/start of November = decade 30. Reference for habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Reference for Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened._
+

@@ -1,0 +1,665 @@
+---
+title: "MaisLE - net based"
+author: "Mirjam R. Rieger"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+<style>
+.scroll5 {
+    height: 500px;
+    overflow-y: scroll;
+}
+</style>
+
+```{r dataprep, echo = F, warning = F, message = F}
+## model parameters
+if(length(grep("zip",  modn) == 1)) pars <- c("alpha", "beta", "gamma", "delta",
+                                              "theta", "z", "k", "etasq", "rhosq")
+if(length(grep("pois", modn) == 1)) pars <- c("alpha", "beta", "gamma", "delta",
+                                              "z", "k", "etasq", "rhosq")
+## specify data
+dat.mod    <- dat.s
+
+## axes labels
+if(LANG == "GER") {
+  dens   <- "Fangdichte [Ind. pro 1000 hm²]"
+  dens2  <- "Dichte"
+  nI     <- "Anzahl Individuen"
+  nS     <- "Anzahl Arten"
+  dist   <- "Abstand zur Feldgrenze [m]"
+  maize  <- paste0("Maisanteil in ", RAD/1000, " km [prop.]")
+  woodS  <- paste0("Wald- & Gehölzanteil in ", RAD/1000, " km [prop.]")
+  height <- "Pflanzenhöhe [cm]"
+  weed   <- "Verunkrautung [prop.]"
+  spec   <- "Arten"
+  year   <- "Jahr"
+  jday   <- "Fangdekade"
+  site   <- "Probefläche"
+}
+
+if(LANG == "EN") {
+  dens   <- "density [ind. per 1000 hm²]"
+  dens2  <- "density"
+  nI     <- "no. of individuals"
+  nS     <- "no. of species"
+  dist   <- "distance to field margin [m]"
+  maize  <- paste0("prop. of maize within ", RAD/1000, " km [prop.]")
+  woodS  <- paste0("prop. of wood within ", RAD/1000, " km [prop.]")
+  height <- "plant height [cm]"
+  weed   <- "weed infestation [prop.]"  
+  spec   <- "species"
+  year   <- "year"
+  jday   <- "decade"
+  site   <- "study site"
+}
+
+## transform data
+dat.mod$dist_c    <- c(scale(round(dat.mod$distance_m, 0)))
+#dat.mod$height_c  <- c(scale(dat.mod$Hoehe_cm))
+dat.mod$maize_p   <- round(dat.mod[,paste0("maize_", RAD, "m")], 0)/100
+dat.mod$woodS_p   <- round(dat.mod[,paste0("woodS_", RAD, "m")], 0)/100
+dat.mod$weed_p    <- dat.mod$prop_weed/100
+dat.mod$maize_c   <- c(scale(dat.mod$maize_p))
+dat.mod$woodS_c   <- c(scale(dat.mod$woodS_p))
+dat.mod$weed_c    <- c(scale(dat.mod$prop_weed))
+dat.mod$jday      <- c(scale(dat.mod$julian_day))
+dat.mod$effort100 <- dat.mod$effort/100
+dat.mod$effort_c  <- c(scale(dat.mod$effort))
+# dat.mod$dens_100hm2 <- dat.mod$nSpec/dat.mod$effort100
+# dat.mod$dens_loghm2 <- dat.mod$nSpec/log(dat.mod$effort)
+
+eff1000 <- (1000-mean(dat.mod$effort))/sd(dat.mod$effort)
+
+## create distance matrix for sites
+site.coor <- dat.mod %>%
+  group_by(site_short) %>%
+  summarize(lon = mean(lon),
+            lat = mean(lat),
+            .groups = "drop")
+
+site.coor <- site.coor[order(site.coor$site_short),]
+
+Dmat <- as.matrix(dist(site.coor[, c("lon", "lat")], diag = T, upper = T))
+
+```
+
+# Data exploration
+
+## Proportion of zeros
+```{r VpropZ, echo = F, warning = F, message = F}
+## get prop. of zeros per species
+dat.mod %>% summarise(propZ = round(length(nSpec[nSpec == 0]) / n(), 2))
+```
+
+  
+## Distribution of response variable {.tabset}
+
+### NInd
+```{r Vhist, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+## histogram of response variable (with and without effort)
+ggplot(dat.mod) +
+  geom_histogram(aes(nSpec, fill = as.factor(year)), binwidth = 1) +
+  xlab(nS) +
+  scale_fill_viridis_d(year, direction = -1, end = 0.9, option = "viridis") +
+  theme_bw(base_size = bs) +
+  theme(legend.position = "top")
+```
+
+## Explanatory variables {.tabset}
+
+### distance
+```{r Vdist, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot1s(x = "distance_m", xlab = dist) + theme_light(base_size = bs)
+```
+
+  
+### maize
+```{r Vmaize, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot1s(x = "maize_p", xlab = maize) + theme_light(base_size = bs)
+```
+
+  
+### woodS
+```{r VwoodS, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot1s(x = "woodS_p", xlab = woodS) + theme_light(base_size = bs)
+```
+
+### plant height
+```{r Vheight, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot1s(x = "Hoehe_cm", xlab = height) + theme_light(base_size = bs)
+```
+
+### weed
+```{r Vweed, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot1s(x = "weed_p", xlab = weed) + theme_light(base_size = bs)
+```
+  
+### jday
+```{r Vjday, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot1s(x = "julian_day", xlab = jday) + theme_light(base_size = bs)
+
+```
+
+### effort
+```{r Vjeffort, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot1s(x = "effort", xlab = "effort [hm²]") + theme_light(base_size = bs)
+
+```
+
+### site
+```{r Vsite, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+ggplot(dat.mod) +
+  geom_point(aes(x = site_short, y = nSpec, color = as.factor(year)),
+             pch = 1, size = 2) +
+  scale_color_viridis_d(year, direction = -1, end = 0.9, option = "inferno", alpha = 0.5) +
+  xlab(site) +
+  ylab(nS) +
+  theme_bw(base_size = bs) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+```
+
+### distance & maize
+```{r Vdm, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "distance_m", xlab = dist, y = "maize_p", ylab = maize) + theme_light(base_size = bs)
+```
+
+### distance & woodS
+```{r Vdw, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "distance_m", xlab = dist, y = "woodS_p", ylab = woodS) + theme_light(base_size = bs)
+```
+  
+### distance & height  
+```{r Vdh, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "distance_m", xlab = dist, y = "Hoehe_cm", ylab = height) + theme_light(base_size = bs)
+```
+
+### distance & weed  
+```{r Vdwe, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "distance_m", xlab = dist, y = "weed_p", ylab = weed) + theme_light(base_size = bs)
+```
+
+### distance & jday 
+```{r Vdj, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "distance_m", xlab = dist, y = "julian_day", ylab = jday) + theme_light(base_size = bs)
+```
+
+### maize & woodS
+```{r Vmw, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "maize_p", xlab = maize, y = "woodS_p", ylab = woodS) + theme_light(base_size = bs)
+```
+
+### maize & height
+```{r Vmh, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "maize_p", xlab = maize, y = "Hoehe_cm", ylab = height) + theme_light(base_size = bs)
+```
+
+### maize & weed
+```{r Vmwe, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "maize_p", xlab = maize, y = "weed_p", ylab = weed) + theme_light(base_size = bs)
+```
+
+### maize & jday 
+```{r Vmj, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "maize_p", xlab = maize, y = "julian_day", ylab = jday) + theme_light(base_size = bs)
+```
+
+### woodS & height
+```{r Vwh, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "woodS_p", xlab = woodS, y = "Hoehe_cm", ylab = height) + theme_light(base_size = bs)
+```
+
+### woodS & weed
+```{r Vwwe, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "woodS_p", xlab = woodS, y = "weed_p", ylab = weed) + theme_light(base_size = bs)
+```
+
+### woodS & jday 
+```{r Vwj, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "woodS_p", xlab = woodS, y = "julian_day", ylab = jday) + theme_light(base_size = bs)
+```
+
+### height & weed  
+```{r Vhwe, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "Hoehe_cm", xlab = height, y = "weed_p", ylab = weed) + theme_light(base_size = bs)
+```
+
+### height & jday 
+```{r Vhj, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "Hoehe_cm", xlab = height, y = "julian_day", ylab = jday) + theme_light(base_size = bs)
+```
+
+### weed & jday 
+```{r Vwej, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot2s(x = "weed_p", xlab = weed, y = "julian_day", ylab = jday) + theme_light(base_size = bs)
+```
+
+# Model
+The used model is `r modn`, the used landscape radius is `r RAD` m.    
+
+```{r runmod, echo = F}
+
+
+stan.data <- with(dat.mod, list(
+    N = nrow(dat.mod),
+    
+    Nyear = length(unique(year2)),
+    Nsite = length(unique(site_short)),
+    Nland = 4, ## change if necessary
+
+    year = as.numeric(as.factor(year2)),
+    site = as.numeric(as.factor(site_short)),
+    jday = jday,
+    
+    effort = effort_c, # effort for nSpec due to non-proportional relation
+
+    land = matrix(c(dist_c,
+                    maize_c,
+                    woodS_c,
+                    weed_c),
+                  ncol = 4), ## change if necessary
+    
+    Dmat = Dmat,
+    
+    y = as.integer(nSpec)
+
+))
+
+
+## run model if RUN == TRUE
+mod <- cmdstan_model(paste0("../stan/", modn, ".stan"))
+
+if(RUN) {
+  fit <- mod$sample(stan.data, chains = 4, parallel_chains = 4, refresh = 100)
+  fit$save_object(file = paste0("../saved models/", type, "_", modn, "_", RAD, "m"))
+}
+
+## read model if RUN == FALSE
+if(!RUN) {
+  fit <- readRDS(paste0("../saved models/", type, "_", modn, "_", RAD, "m"))
+}
+
+# fit$cmdstan_diagnose()
+
+## number of simulations
+nsim <- prod(dim(fit$draws("etasq"))[1:2])
+```
+
+<div class="scroll5">
+```{r ppsum, echo = F}
+## summary per parameter
+print(fit$summary(pars), n = nrow(fit$summary(pars))+10)
+
+```
+</div>
+
+## Posterior predictive checks  {.tabset}
+
+<div class="scroll5">
+### areas
+```{r ppc1, echo = F, fig.dim = c(9, 5)}
+for(p in pars) {
+  print(mcmc_areas(fit$draws(p),
+                   prob = 0.80,
+                   prob_outer = 0.95))
+}
+```
+</div>
+
+<div class="scroll5">
+### dens_overlay
+```{r ppc2, echo = F, fig.dim = c(9, 5)}
+for(p in pars) {
+  print(mcmc_dens_overlay(fit$draws(p)))
+}
+```
+</div>
+
+<div class="scroll5">
+### trace
+```{r ppc3, echo = F, fig.dim = c(9, 5)}
+for(p in pars) {
+  print(mcmc_trace(fit$draws(p)))
+}
+```
+</div>
+
+
+## posterior predictive stats   {.tabset}
+
+<div class="scroll5">
+### NSpec
+```{r pps1, echo = F, warning = F, message = F, fig.dim = c(4.5, 4)}
+modsims <- fit$draws("y_sim", format = "df")
+
+y    <- stan.data$y
+
+yrep <- get_draws("y_sim")
+
+print(ppc_hist(y, yrep[runif(8, 1, nsim),]))
+
+gmean  <- ppc_stat(y, yrep, stat = "mean") +
+  ggtitle("mean") + theme(legend.position = "none")
+gsd    <- ppc_stat(y, yrep, stat = "sd") +
+  ggtitle("sd") + theme(legend.position = "none")
+gpropZ <- ppc_stat(y, yrep, stat = "prop_zero") +
+  ggtitle("propZ") + theme(legend.position = "none")
+gmax   <- ppc_stat(y, yrep, stat = "max") +
+  ggtitle("max") + theme(legend.position = "none")
+
+grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
+
+```
+</div>
+
+
+## Posterior predictions {.tabset}
+
+```{r ppoH, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+
+## number of simulations for graph
+gsim <- round(runif(SIM, 1, nsim))
+
+## get draws
+if(length(grep("pois", modn) == 1)) modsims <- fit$draws(c("alpha", "beta", "gamma", "delta", "k"), format = "df")
+if(length(grep("zip", modn) == 1)) modsims <- fit$draws(c("alpha", "beta", "gamma", "delta", "theta", "k"), format = "df")
+
+write.csv(modsims, paste0("../output/Coefficient_estimates_", type, "_", modn, "_", RAD, "m.csv"), row.names = F, fileEncoding = "latin1")
+  
+xx <- modsims[,grep("beta", colnames(modsims))]
+for(i in 1:ncol(xx)) {
+  x <- xx[,i]
+  print(colnames(xx)[i])
+  print(round((sum(x>0)/nrow(x) + 0.5*sum(x=0)/nrow(x))*100, 1))
+}
+
+if(PREDICT) {
+  
+  ## extract predictions
+  pp <- data.frame()
+  ff <- data.frame()
+  
+  newdat <- list()
+  
+  ## julian day
+  newdat[["jday"]] <- with(stan.data, expand.grid(
+      land1 = mean(land[,1]),
+      land2 = mean(land[,2]),
+      land3 = mean(land[,3]),
+      land4 = mean(land[,4]),
+      jday = seq(min(jday), max(jday), length = 100),
+      effort = mean(effort),
+      site = 1))
+  newdat[["jday"]]$jday2 <- newdat[["jday"]]$jday^2
+  newdat[["jday"]]$effort2 <- newdat[["jday"]]$effort^2
+  # newdat[["jday"]]$effort3 <- newdat[["jday"]]$effort^3
+  
+  ## distance
+  newdat[["dist"]] <- with(stan.data, expand.grid(
+      land1 = seq(min(land[,1]), max(land[,1]), length = 100),
+      land2 = mean(land[,2]),
+      land3 = mean(land[,3]),
+      land4 = mean(land[,4]),
+      jday = seq(min(jday), max(jday), length = 5),
+      effort = mean(effort),
+      site = 1))
+  newdat[["dist"]]$jday2 <- newdat[["dist"]]$jday^2
+  newdat[["dist"]]$effort2 <- newdat[["dist"]]$effort^2
+  # newdat[["dist"]]$effort3 <- newdat[["dist"]]$effort^3
+  
+  ## maize
+  newdat[["maize"]] <- with(stan.data, expand.grid(
+      land1 = mean(land[,1]),
+      land2 = seq(min(land[,2]), max(land[,2]), length = 100),
+      land3 = mean(land[,3]),
+      land4 = mean(land[,4]),
+      jday = seq(min(jday), max(jday), length = 5),
+      effort = mean(effort),
+      site = 1))
+  newdat[["maize"]]$jday2 <- newdat[["maize"]]$jday^2
+  newdat[["maize"]]$effort2 <- newdat[["maize"]]$effort^2
+  # newdat[["maize"]]$effort3 <- newdat[["maize"]]$effort^3
+  
+  ## woodS
+  newdat[["woodS"]] <- with(stan.data, expand.grid(
+      land1 = mean(land[,1]),
+      land2 = mean(land[,2]),
+      land3 = seq(min(land[,3]), max(land[,3]), length = 100),
+      land4 = mean(land[,4]),
+      jday = seq(min(jday), max(jday), length = 5),
+      effort = mean(effort),
+      site = 1))
+  newdat[["woodS"]]$jday2 <- newdat[["woodS"]]$jday^2
+  newdat[["woodS"]]$effort2 <- newdat[["woodS"]]$effort^2
+  # newdat[["woodS"]]$effort3 <- newdat[["woodS"]]$effort^3
+  
+  ## weed
+  newdat[["weed"]] <- with(stan.data, expand.grid(
+      land1 = mean(land[,1]),
+      land2 = mean(land[,2]),
+      land3 = mean(land[,3]),
+      land4 = seq(min(land[,4]), max(land[,4]), length = 100),
+      jday = seq(min(jday), max(jday), length = 5),
+      effort = mean(effort),
+      site = 1))
+  newdat[["weed"]]$jday2 <- newdat[["weed"]]$jday^2
+  newdat[["weed"]]$effort2 <- newdat[["weed"]]$effort^2
+  # newdat[["weed"]]$effort3 <- newdat[["weed"]]$effort^3
+  
+  ## effort
+  newdat[["effort"]] <- with(stan.data, expand.grid(
+      land1 = mean(land[,1]),
+      land2 = mean(land[,2]),
+      land3 = mean(land[,3]),
+      land4 = mean(land[,4]),
+      jday = seq(min(jday), max(jday), length = 5),
+      effort = seq(min(effort), max(effort), length = 100),
+      site = 1))
+  newdat[["effort"]]$jday2 <- newdat[["effort"]]$jday^2 
+  newdat[["effort"]]$effort2 <- newdat[["effort"]]$effort^2
+  # newdat[["effort"]]$effort3 <- newdat[["effort"]]$effort^3
+  
+  for(s in 1) {
+    
+    if(length(grep("zip", modn) == 1)) dzi <- c(get_draws(paste0("theta[", s))) # zi part
+
+    dal <- rowMeans(get_draws(paste0("alpha[", s))) # average across years
+    db1 <- c(get_draws(paste0("beta[", s, ",1]")))  # land1, distance
+    db2 <- c(get_draws(paste0("beta[", s, ",2]")))  # land2, maize
+    db3 <- c(get_draws(paste0("beta[", s, ",3]")))  # land3, woodS
+    db4 <- c(get_draws(paste0("beta[", s, ",4]")))  # land4, weed
+    dg1 <- c(get_draws(paste0("gamma[", s, ",1]"))) # jday
+    dg2 <- c(get_draws(paste0("gamma[", s, ",2]"))) # jday2
+    dd1 <- c(get_draws(paste0("delta[", s, ",1]"))) # effort
+    dd2 <- c(get_draws(paste0("delta[", s, ",2]"))) # effort2
+   # dd3 <- c(get_draws(paste0("delta[", s, ",3]"))) # effort3
+    dk  <- rowMeans(get_draws(paste0("k[", s))) # average across sites
+    
+    for(p in names(newdat)) {
+      Xmat  <- model.matrix(~ land1 + land2 + land3 + land4 + 
+                              jday + jday2 + 
+                              effort + effort2 + site, data = newdat[[p]])
+  
+      XmatZ <- model.matrix(~ 1, data = newdat[[p]])
+      
+      fitmat <- matrix(ncol = nsim, nrow = nrow(newdat[[p]]))
+      
+      if(length(grep("zip", modn) == 1)) {
+        for(j in 1:nsim) {
+          
+          # without plogis for zi (already between (0,1)), with exp for poisson
+          fitmat[, j] <- (1 - XmatZ %*% dzi[j]) * # zi part
+            exp(Xmat %*% c( # poisson part
+              dal[j], # year
+              db1[j], # land1 (distance)
+              db2[j], # land2 (maize)
+              db3[j], # land3 (woodS)
+              db4[j], # land4 (weed)
+              dg1[j],  # jday    
+              dg2[j],  # jday2   
+              dd1[j], # effort
+              dd2[j], # effort2
+             # dd3[j], # effort3
+              dk[j] # site
+              ))
+        }
+      }
+      
+      if(length(grep("pois", modn) == 1)) {
+        for(j in 1:nsim) {
+          
+          # exp for poisson
+          fitmat[, j] <- exp(Xmat %*% c( # poisson part
+              dal[j], # year
+              db1[j], # land1 (distance)
+              db2[j], # land2 (maize)
+              db3[j], # land3 (woodS)
+              db4[j], # land4 (weed)
+              dg1[j],  # jday    
+              dg2[j],  # jday2   
+              dd1[j], # effort
+              dd2[j], # effort2
+             # dd3[j], # effort3
+              dk[j] # site
+              ))
+        }
+      }
+      
+      tmp <- newdat[[p]]
+      
+      ## summarize across jday (for other predictors)
+      if(p != "jday") {
+        tmp <- cbind(tmp, fitmat)
+        
+        tmp <- aggregate(. ~land1 + land2 + land3 + land4 + effort + effort2 + site, 
+                            data = tmp, FUN = mean)
+        
+        fitmat <- as.matrix(tmp[,(ncol(tmp)-nsim+1):ncol(tmp)])
+        dimnames(fitmat) <- NULL # remove dimnames otherwise it can not be merged with jday fitmat
+        tmp <- tmp[,1:(ncol(tmp)-nsim)]
+      
+      }
+      
+      ## extract quantiles
+      tmp$fit <- apply(X = fitmat, MARGIN = 1, FUN = quantile, probs = 0.5)
+      tmp$mean <- apply(X = fitmat, MARGIN = 1, FUN = mean)
+      tmp$lwr <- apply(X = fitmat, MARGIN = 1, FUN = quantile, probs = 0.025)
+      tmp$upr <- apply(X = fitmat, MARGIN = 1, FUN = quantile, probs = 0.975)
+      
+      ## add variables
+      tmp$pred <- p
+      tmp$sp <- s
+      tmp$species <- "nSpec"
+      
+      ## merge with previous data
+      pp <- rbind(pp, tmp)
+      
+      ## extract 100 simulations (for Confidence lines)
+      df.sim <- as.data.frame(fitmat[,gsim])
+      
+      ## add variables
+      df.sim$sp <- s
+      df.sim$species <- "nSpec"
+      df.sim$pred <- p
+      
+      ## merge with previous simulations
+      ff <- rbind(ff, df.sim)
+    
+    }
+    
+    gc()
+    
+    write.csv(pp, paste0("../output/Predictions_", type, "_", modn, "_", RAD, "m.csv"), 
+              row.names = F, fileEncoding = "latin1")
+    write.csv(ff, paste0("../output/Predictions_sim_", type, "_", modn, "_", RAD, "m.csv"), 
+              row.names = F, fileEncoding = "latin1")
+  
+  }
+  
+  ## rescale parameters
+  pp$julian_day <- rescale(var = dat.mod$julian_day, var_c = pp$jday)
+  pp$distance_m <- rescale(var = dat.mod$distance_m, var_c = pp$land1)
+  pp$maize_p    <- rescale(var = dat.mod$maize_p,    var_c = pp$land2)
+  pp$woodS_p    <- rescale(var = dat.mod$woodS_p,    var_c = pp$land3)
+  pp$weed_p     <- rescale(var = dat.mod$weed_p,     var_c = pp$land4)
+  pp$effort     <- rescale(var = dat.mod$effort,     var_c = pp$effort)
+  
+  
+  pp.ov <- pp %>% group_by(distance_m, maize_p, woodS_p, weed_p, julian_day, effort, pred) %>%
+    summarise(fit = sum(fit),
+              mean = sum(mean),
+              lwr = sum(lwr),
+              upr = sum(upr),
+              .groups = "drop")
+  
+  
+  write.csv(pp, paste0("../output/Predictions_", type, "_", modn, "_", RAD, "m.csv"), 
+            row.names = F, fileEncoding = "latin1")
+  write.csv(ff, paste0("../output/Predictions_sim_", type, "_", modn, "_", RAD, "m.csv"), 
+            row.names = F, fileEncoding = "latin1")
+  write.csv(pp.ov, paste0("../output/Predictions_overall_", type, "_", modn, "_", RAD, "m.csv"), 
+                          row.names = F, fileEncoding = "latin1")
+  
+}
+
+pp <- read.csv(paste0("../output/Predictions_", type, "_", modn, "_", RAD, "m.csv"), 
+               encoding = "latin1")
+ff <- read.csv(paste0("../output/Predictions_sim_", type, "_", modn, "_", RAD, "m.csv"), 
+               encoding = "latin1")
+pp.ov <- read.csv(paste0("../output/Predictions_overall_", type, "_", modn, "_", RAD, "m.csv"), 
+                  encoding = "latin1")
+
+```
+
+
+### jday
+```{r ppjday, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot3s(x = "julian_day", xlab = jday, preds = pp[pp$pred == "jday",], sims = ff[ff$pred == "jday",])
+plot3s(x = "julian_day", xlab = jday, preds = pp[pp$pred == "jday",], sims = ff[ff$pred == "jday",], 
+      plot.raw = F)
+#ggsave(paste0("../graphs/prefig/jday_", type, "_", RAD, "m.png"), width = 18, height = 12, units = "cm")
+```
+
+### distance
+```{r ppdist, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot3s(x = "distance_m", xlab = dist, preds = pp[pp$pred == "dist",], sims = ff[ff$pred == "dist",])
+plot3s(x = "distance_m", xlab = dist, preds = pp[pp$pred == "dist",], sims = ff[ff$pred == "dist",],
+      plot.raw = F)
+#ggsave(paste0("../graphs/prefig/dist_", type, "_", RAD, "m.png"), width = 18, height = 12, units = "cm")
+```
+
+
+### maize
+```{r ppmaize, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot3s(x = "maize_p", xlab = maize, preds = pp[pp$pred == "maize",], sims = ff[ff$pred == "maize",])
+plot3s(x = "maize_p", xlab = maize, preds = pp[pp$pred == "maize",], sims = ff[ff$pred == "maize",],
+      plot.raw = F)
+#ggsave(paste0("../graphs/prefig/maize_", type, "_", RAD, "m.png"), width = 18, height = 12, units = "cm")
+```
+
+
+### woodS
+```{r ppwoodS, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot3s(x = "woodS_p", xlab = woodS, preds = pp[pp$pred == "woodS",], sims = ff[ff$pred == "woodS",])
+plot3s(x = "woodS_p", xlab = woodS, preds = pp[pp$pred == "woodS",], sims = ff[ff$pred == "woodS",],
+      plot.raw = F)
+#ggsave(paste0("../graphs/prefig/woodS_", type, "_", RAD, "m.png"), width = 18, height = 12, units = "cm")
+```
+
+
+### weed
+```{r ppweed, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot3s(x = "weed_p", xlab = weed, preds = pp[pp$pred == "weed",], sims = ff[ff$pred == "weed",])
+plot3s(x = "weed_p", xlab = weed, preds = pp[pp$pred == "weed",], sims = ff[ff$pred == "weed",],
+      plot.raw = F)
+#ggsave(paste0("../graphs/prefig/weed_", type, "_", RAD, "m.png"), width = 18, height = 12, units = "cm")
+```
+
+### effort
+```{r ppeffort, echo = F, warning = F, message = F, fig.dim = c(10, 5)}
+plot3s(x = "effort", xlab = "effort [hm²]", preds = pp[pp$pred == "effort",], sims = ff[ff$pred == "effort",])
+plot3s(x = "effort", xlab = "effort [hm²]", preds = pp[pp$pred == "effort",], sims = ff[ff$pred == "effort",],
+      plot.raw = F)
+#ggsave(paste0("../graphs/prefig/effort_", type, "_", RAD, "m.png"), width = 18, height = 12, units = "cm")
+```

@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+/saved models/
+/output/
+*.exe
+*.pdf
+/graphs/prefig/
+/.quarto/
+**/*.quarto_ipynb
+index.docx

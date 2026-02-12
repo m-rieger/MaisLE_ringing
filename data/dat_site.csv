@@ -1,0 +1,120 @@
+"site_short","year","site","scheme","effort_hm2","dur_h","Nnet","Hnet_m","Lnet_m","Anet_m2","pesticide","Ndays","area_ha"
+"NI-AG-20",2020,"Goldenstedt, Niedersachsen","voluntary",6833.25,54.3833333333333,6,2.5,54,135,"",13,NA
+"NI-AG-22",2022,"Goldenstedt, Niedersachsen","voluntary",6708.8,39.9333333333333,7,2.4,70,168,"yes",10,5.86775421528273
+"NI-AG-23",2023,"Goldenstedt, Niedersachsen","voluntary",6472.8,44.95,6,2.4,60,144,NA,10,11.8930020555027
+"NI-CG-17",2017,"Wardenburg, Niedersachsen","voluntary",4308.5,41.0333333333333,4,2.5,42,105,"yes",10,8.14006564088762
+"NI-CG-18",2018,"Wardenburg, Niedersachsen","voluntary",6167.5,41.1166666666667,5,2.5,60,150,"",10,7.82012588988245
+"NI-CG-19",2019,"Wardenburg, Niedersachsen","voluntary",4227.5,28.1833333333333,5,2.5,60,150,"",7,10.0480935325546
+"BY-DH-16",2016,"Ansbach, Bayern","voluntary",4788,39.9,15,2,60,120,NA,10,NA
+"RP-DK-16",2016,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",11412.5,69.1666666666667,10,2.2,75,165,"yes",12,NA
+"RP-DK-17",2017,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",9645.29166666667,46.4833333333333,8,2.5,83,207.5,NA,12,4.83042185433903
+"RP-DK-18",2018,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",10956.6666666667,57.6666666666667,7,2.5,76,190,"",12,3.42363830263019
+"RP-DK-19",2019,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",11201,64.9333333333333,6,2.5,69,172.5,"",12,2.26369238540381
+"RP-DK-20",2020,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",10450.625,60.5833333333333,6,2.5,69,172.5,"",10,4.43304324811194
+"RP-DK-21",2021,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",9545.43333333333,61.9833333333333,5,2.2,70,154,"yes",11,1.74523256080741
+"RP-DK-22",2022,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",10993.75,58.6333333333333,7,2.5,75,187.5,"yes",10,NA
+"RP-DK-23",2023,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",12063.8833333333,47.6833333333333,9,2.2,115,253,NA,8,2.07641881660726
+"RP-DK-24",2024,"Haßloch-Ellerstadt, Rheinland-Pfalz","voluntary",11358.75,50.4833333333333,7,2.5,90,225,NA,9,3.18726696076095
+"MV-EH-20",2020,"Bliesekow-Rostock, Mecklenburg-Vorpommern","voluntary",12127,72.4,6,2.5,67,167.5,"",16,17.5770310561041
+"MV-EH-21",2021,"Bliesekow-Rostock, Mecklenburg-Vorpommern","voluntary",10203,56.6833333333333,6,2.5,72,180,"no",12,13.0063396004597
+"MV-EH-22",2022,"Bliesekow-Rostock, Mecklenburg-Vorpommern","voluntary",20182.5,70.2,11,2.5,115,287.5,"no",17,32.8801336946899
+"MV-EH-23",2023,"Hanstorf, Mecklenburg-Vorpommern","voluntary",24223.6,87.7666666666667,11,2.4,115,276,"yes",20,24.6251500046585
+"MV-EH-24",2024,"Hanstorf, Mecklenburg-Vorpommern","voluntary",14965.92,54.7,11,2.4,114,273.6,"no",13,14.2531783997399
+"NI-HO-17",2017,"Wendesse-Peine, Niedersachsen","voluntary",3990,44.3833333333333,6,2,47,94,NA,13,6.62532868529093
+"NI-HO-18",2018,"Wendesse-Peine, Niedersachsen","voluntary",7491.66666666667,51.6666666666667,5,2.5,58,145,"",12,7.28491559673622
+"NI-HO-20",2020,"Wendesse-Peine, Niedersachsen","voluntary",4098.33333333333,40.9833333333333,4,2,50,100,"",10,NA
+"BW-HS-17",2017,"Lottstetten, Baden-Württemberg","voluntary",2582.4,35.8666666666667,6,2,36,72,NA,9,2.24380201203078
+"BW-HS-19",2019,"Lottstetten, Baden-Württemberg","voluntary",4068.4,48.4333333333333,7,2,42,84,"",11,1.89327393814921
+"BW-HS-20",2020,"Lottstetten, Baden-Württemberg","voluntary",3787,45.0833333333333,7,2,42,84,"",11,4.93110661129523
+"BW-HS-21",2021,"Lottstetten, Baden-Württemberg","voluntary",3482.4,48.3666666666667,6,2,36,72,"no",12,1.88155826593451
+"BW-HS-23",2023,"Lottstetten, Baden-Württemberg","voluntary",3513.33333333333,43.9166666666667,6,2,40,80,"yes",11,1.92064224651223
+"SH-JH-17",2017,"Stellau, Schleswig-Holstein","voluntary",14193.3333333333,70.9666666666667,6,2.5,80,200,NA,13,15.201074740284
+"SH-JH-18",2018,"Stellau, Schleswig-Holstein","voluntary",10146.6666666667,50.7333333333333,6,2.5,80,200,"yes",10,4.79031325611174
+"SH-JH-19",2019,"Stellau, Schleswig-Holstein","voluntary",11003.3333333333,55.0166666666667,6,2.5,80,200,"",12,15.2042248693519
+"ST-MS-16",2016,"Reupzig, Sachsen-Anhalt","voluntary",8494.875,41.95,9,2.5,81,202.5,NA,7,NA
+"ST-MS-17",2017,"Reupzig, Sachsen-Anhalt","voluntary",14385,63.9333333333333,10,2.5,90,225,NA,11,2.4720352136282
+"ST-MS-18",2018,"Zehmigkau, Sachsen-Anhalt","voluntary",5388.75,23.95,10,2.5,90,225,"",4,NA
+"ST-MS-19",2019,"Reupzig, Sachsen-Anhalt","voluntary",10785,47.9333333333333,10,2.5,90,225,"",8,86.5635046154797
+"RP-MH-16",2016,"Lambsheim, Rheinland-Pfalz","voluntary",6288.75,55.9,3,2.5,45,112.5,NA,14,NA
+"RP-MH-17",2017,"Maxdorf, Rheinland-Pfalz","voluntary",3942,58.4,3,2.5,27,67.5,NA,13,2.03009084016245
+"RP-MH-18",2018,"Maxdorf, Rheinland-Pfalz","voluntary",7153.125,45.4166666666667,6,2.5,63,157.5,"",10,1.50175753871724
+"RP-MH-19",2019,"Maxdorf, Rheinland-Pfalz","voluntary",7686,48.8,6,2.5,63,157.5,"",11,2.11023908442035
+"RP-MH-20",2020,"Frankenthal, Rheinland-Pfalz","voluntary",10111.5,64.2,6,2.5,63,157.5,"",15,2.43954700602622
+"RP-MH-21",2021,"Frankenthal, Rheinland-Pfalz","voluntary",7896,50.1333333333333,6,2.5,63,157.5,"yes",12,NA
+"RP-MH-22",2022,"Frankenthal, Rheinland-Pfalz","voluntary",7835.625,49.75,6,2.5,63,157.5,"yes",12,NA
+"RP-MH-23",2023,"Frankenthal, Rheinland-Pfalz","voluntary",15730,104.866666666667,6,2.5,60,150,NA,23,2.13168895813078
+"RP-MH-24",2024,"Frankenthal, Rheinland-Pfalz","voluntary",6065,40.4333333333333,6,2.5,60,150,"yes",10,2.31879727829695
+"BB-MF-16",2016,"BSR Schorfheide-Chorin, Brandenburg","voluntary",19912,41.4833333333333,16,2.5,192,480,"no",8,32.0442317863432
+"NI-MT-17",2017,"Friedeburg, Niedersachsen","voluntary",5952.55,39.95,9,2.5,59.6,149,NA,10,2.62143741350714
+"BB-A1-23",2023,"Diedersdorf A1, Brandenburg","professional",15220.8333333333,60.8833333333333,10,2.5,100,250,"fragen",11,80.454365187645
+"BB-A2-23",2023,"Diedersdorf A2, Brandenburg","professional",15225,60.9,10,2.5,100,250,"fragen",11,80.454365187645
+"BB-B1-23",2023,"Vierlinden B1, Brandenburg","professional",20712.5,82.85,10,2.5,100,250,"no",15,46.3882462511322
+"BB-C1-23",2023,"Vierlinden C1, Brandenburg","professional",23333.3333333333,93.3333333333333,10,2.5,100,250,"no",19,21.8508104794286
+"BB-C2-23",2023,"Vierlinden C2, Brandenburg","professional",21837.5,87.35,10,2.5,100,250,"no",16,21.8508104794286
+"BB-D1-23",2023,"Zeschdorf D1, Brandenburg","professional",14487.5,57.95,10,2.5,100,250,"yes",10,54.5055994428444
+"BB-D2-23",2023,"Zeschdorf D2, Brandenburg","professional",18733.3333333333,74.9333333333333,10,2.5,100,250,"yes",13,54.5055994428444
+"BB-D3-23",2023,"Zeschdorf D3, Brandenburg","professional",6120.83333333333,48.9666666666667,5,2.5,50,125,"yes",8,15.6752892187261
+"BB-E1-23",2023,"Zeschdorf E1, Brandenburg","professional",13866.6666666667,55.4666666666667,10,2.5,100,250,"yes",10,8.71526701793739
+"BB-F1-23",2023,"Zeschdorf F1, Brandenburg","professional",8733.33333333333,34.9333333333333,10,2.5,100,250,"yes",6,147.51881362448
+"BB-F2-23",2023,"Zeschdorf F2, Brandenburg","professional",8729.16666666667,34.9166666666667,10,2.5,100,250,"yes",6,147.51881362448
+"BW-G1-22",2022,"Gomaringen G1, Baden-Württemberg","professional",26464.5833333333,107.85,10,2.5,100,250,"yes",19,0.490524221510114
+"BW-G2-22",2022,"Gomaringen G2, Baden-Württemberg","professional",25466.6666666667,101.866666666667,10,2.5,100,250,"yes",18,1.25265460183303
+"BW-G3-22",2022,"Gomaringen G3, Baden-Württemberg","professional",7875,47.85,6,2.5,60,150,"yes",9,6.72306644818725
+"BW-K1-22",2022,"Tübingen-Bühl, Baden-Württemberg","professional",7737.5,30.95,10,2.5,100,250,"no",5,1.42207352582086
+"BW-L1-22",2022,"Hirrlingen, Baden-Württemberg","professional",14600,58.4,10,2.5,100,250,"no",11,1.61038674714132
+"BW-M1-22",2022,"Rottenburg M1, Baden-Württemberg","professional",16725,66.9,10,2.5,100,250,"no",11,0.808500114655495
+"BW-M2-22",2022,"Rottenburg M2, Baden-Württemberg","professional",15850,63.4,10,2.5,100,250,"no",11,0.69878161983341
+"BW-S1-22",2022,"Dusslingen S1, Baden-Württemberg","professional",7737.5,30.95,10,2.5,100,250,"no",5,10.3151326841807
+"BW-S2-22",2022,"Dusslingen S2, Baden-Württemberg","professional",7983.33333333333,31.9333333333333,10,2.5,100,250,"no",6,4.99843885542341
+"BW-Z1-22",2022,"Sickenhausen Z1, Baden-Württemberg","professional",12225,48.9,10,2.5,100,250,"yes",11,0.713186044359207
+"BW-Z2-22",2022,"Sickenhausen Z2, Baden-Württemberg","professional",11220.8333333333,44.8833333333333,10,2.5,100,250,"yes",8,1.11840255211704
+"BW-Z3-22",2022,"Sickenhausen Z3, Baden-Württemberg","professional",11220.8333333333,44.8833333333333,10,2.5,100,250,"yes",9,0.411366379883065
+"NI-N1-24",2024,"Molbergen N1, Niedersachsen","professional",14979.1666666667,59.9166666666667,10,2.5,100,250,"",10,34.9705690528466
+"NI-N2-24",2024,"Molbergen N2, Niedersachsen","professional",14979.1666666667,59.9166666666667,10,2.5,100,250,"",10,34.9705690528466
+"NI-R1-24",2024,"Garrel R1, Niedersachsen","professional",21079.1666666667,84.3166666666667,10,2.5,100,250,"yes",15,13.7555439860427
+"NI-R2-24",2024,"Garrel R2, Niedersachsen","professional",32943.75,87.85,15,2.5,150,375,"yes",16,14.1299863882373
+"NI-V1-24",2024,"Varrelbusch V1, Niedersachsen","professional",17962.5,71.85,10,2.5,100,250,"",12,15.9142205928326
+"NI-V2-24",2024,"Varrelbusch V2, Niedersachsen","professional",14966.6666666667,59.8666666666667,10,2.5,100,250,"",10,26.3056647973513
+"NI-W1-24",2024,"Hoheging W1, Niedersachsen","professional",14991.6666666667,59.9666666666667,10,2.5,100,250,"no",10,2.38168237356802
+"NI-W2-24",2024,"Hoheging W2, Niedersachsen","professional",13975,55.9,10,2.5,100,250,"no",10,13.4099914881415
+"BW-NA-16",2016,"Rosenfeld-Täbingen, Baden-Württemberg","voluntary",3923.99,32.2166666666667,5,2.9,42,121.8,NA,5,NA
+"SL-RK-16",2016,"Merzig, Saarland","voluntary",18890,62.9666666666667,10,2.5,120,300,NA,12,NA
+"NI-SH-16",2016,"Marxen, Niedersachsen","voluntary",4241.25,43.5,4,2.5,39,97.5,NA,10,NA
+"NI-SH-17",2017,"Marxen, Niedersachsen","voluntary",4977,47.4,5,2.5,42,105,NA,11,32.6829936847932
+"NI-SH-20",2020,"Brackel, Niedersachsen","voluntary",6323.45833333333,53.8166666666667,5,2.5,47,117.5,"yes",12,NA
+"NI-SH-21",2021,"Quarrendorf, Niedersachsen","voluntary",5685.875,40.8666666666667,5,2.5,54,135,"yes",10,11.6837222465728
+"NI-SH-23",2023,"Brackel, Niedersachsen","voluntary",6594.5,39.9666666666667,6,2.5,66,165,"yes",10,7.03708591463994
+"SL-SB-23",2023,"Schwarzenholz, Saarland","voluntary",4046.66666666667,40.4666666666667,4,2.5,40,100,"no",10,2.6419464521402
+"BW-SR-20",2020,"Bühl, Baden-Württemberg","voluntary",17970,79.8666666666667,8,2.5,90,225,"",20,6.08992844035463
+"MV-SK-22",2022,"Rosenthal, Mecklenburg-Vorpommern","voluntary",5052,42.1,8,2.5,48,120,"yes",10,14.1503458603624
+"MV-SK-23",2023,"Rosenthal, Mecklenburg-Vorpommern","voluntary",6620.83333333333,52.9666666666667,5,2.5,50,125,NA,12,14.1503458604131
+"MV-SK-24",2024,"Rossin, Mecklenburg-Vorpommern","voluntary",9918.41666666667,40.4833333333333,11,2.5,98,245,NA,10,186.507953324833
+"BY-AD-16",2016,"Abtsdorf, Bayern","voluntary",1896.3,43,4,2.1,21,44.1,"no",9,NA
+"BY-BS-17",2017,"Brandstätt, Bayern","voluntary",12944.25,95.8833333333333,5,2.5,54,135,NA,12,2.75086367307249
+"BY-BS-20",2020,"Brandstätt, Bayern","voluntary",9597.5,127.966666666667,5,2.5,30,75,"",14,3.62168916433155
+"BY-BS-21",2021,"Brandstätt, Bayern","voluntary",20518.75,195.416666666667,6,3,35,105,"yes",19,NA
+"BY-BS-22",2022,"Brandstätt, Bayern","voluntary",6725,67.25,4,2.5,40,100,NA,9,2.46817630456425
+"BY-BS-24",2024,"Brandstätt, Bayern","voluntary",5265,52.65,4,2.5,40,100,"",8,NA
+"BY-FB-16",2016,"Försberg, Bayern","voluntary",1700.055,38.55,4,2.1,21,44.1,NA,9,NA
+"BY-FB-17",2017,"Försberg, Bayern","voluntary",8415,62.3333333333333,5,2.5,54,135,NA,10,6.39367442460479
+"BY-FB-18",2018,"Försberg, Bayern","voluntary",2560.5,28.45,5,2.5,36,90,"",5,4.27653636104325
+"BY-FB-21",2021,"Försberg, Bayern","voluntary",12826.8,101.8,4,3,42,126,"yes",13,NA
+"BY-FD-16",2016,"Försdorf, Bayern","voluntary",1933.785,43.85,4,2.1,21,44.1,NA,9,NA
+"BY-FD-18",2018,"Försdorf, Bayern","voluntary",3687,40.9666666666667,5,2.5,36,90,"",6,3.32979885873049
+"BY-FD-19",2019,"Försdorf-Brandstätt, Bayern","voluntary",8954.66666666667,111.933333333333,6,2.5,32,80,"",16,2.28781448173523
+"BY-FD-24",2024,"Försdorf, Bayern","voluntary",7718.33333333333,77.1833333333333,4,2.5,40,100,"",15,NA
+"BY-TA-16",2016,"Tänning, Bayern","voluntary",1883.07,42.7,4,2.1,21,44.1,NA,9,NA
+"BY-TA-20",2020,"Tänning, Bayern","voluntary",8643,96.0333333333333,3,2.5,36,90,"",11,7.54903422437553
+"BY-TD-19",2019,"Treppendorf, Bayern","voluntary",9342.66666666667,116.783333333333,6,2.5,32,80,"",20,2.12526474744683
+"BY-TD-22",2022,"Treppendorf, Bayern","voluntary",8025,80.25,4,2.5,40,100,NA,11,2.14446878814148
+"BY-TS-23",2023,"Brandstätt, Bayern","voluntary",5721.66666666667,57.2166666666667,4,2.5,40,100,NA,10,2.41397567690648
+"HE-LL-18",2018,"Maisfeld Linden-Leihgestern, Hessen","voluntary",13842.6666666667,30.9333333333333,18,2.5,179,447.5,"",9,1.75867693226561
+"HE-UG-18",2018,"Maisfeld Uni Gießen, Hessen","voluntary",6192.33333333333,23.8166666666667,11,2.5,104,260,"",7,2.39547517621368
+"BW-WH-23",2023,"Mimmenhausen, Baden-Württemberg","voluntary",6088.5,32.95,7,2.5,79,197.5,NA,8,17.9294503014363
+"NW-WH-19",2019,"Münster, Nordrhein-Westfalen","voluntary",895.5,9.95,3,2.5,36,90,"",3,NA
+"NW-WH-20",2020,"Münster, Nordrhein-Westfalen","voluntary",5558.4,28.95,6,2,96,192,"",5,2.3909239012436
+"ST-WH-17",2017,"Kochstedt, Sachsen-Anhalt","voluntary",8587.2,59.6333333333333,6,2,72,144,NA,13,6.84915625416041
+"ST-WH-19",2019,"Dessau-Mosigkau, Sachsen-Anhalt","voluntary",2795.73333333333,43.6833333333333,6,2,32,64,"",10,10.4344449347049
+"ST-WH-20",2020,"Dessau-Mosigkau, Sachsen-Anhalt","voluntary",8409.6,58.4,6,2,72,144,"",13,NA
+"ST-WH-21",2021,"Dessau-Mosigkau, Sachsen-Anhalt","voluntary",6583.2,45.7166666666667,6,2,72,144,"yes",10,10.3297601686572
+"ST-WH-23",2023,"Dessau-Mosigkau, Sachsen-Anhalt","voluntary",5405.4,40.95,6,2,66,132,"yes",10,10.1396577110648
