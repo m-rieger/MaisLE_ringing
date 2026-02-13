@@ -19,7 +19,7 @@ modnL    <- c("zinb_Dmat_oH", "zinb_Dmat_oH", "pois_Dmat_oH_NSpec")
 RUN      <- T # if TRUE model is run, if FALSE model is read in
 PREDICT  <- T # if TRUE predictions are run, if FALSE predictions are read in
 
-LANG     <- "GER" # Language in German "GER" or English "EN"
+LANG     <- "EN" # Language in German "GER" or English "EN"
 
 ## radius of landscape shares in m
 radL     <- c(500, 750, 1000)
@@ -132,6 +132,8 @@ sum(dat.site$area_ha)
 
 
 #### m1) Model individual-density per species ----------------------------------
+# note: due to the large dataset, each model runs up to one or two hours. 
+# The species diversity model m3) is faster
 type <- "m1"
 modn <- modnL[1]
 

@@ -59,7 +59,6 @@ for(i in mod.list){
 
 dat.mod <- read.csv("./output/data.csv", fileEncoding = "latin1")
 dat.mod2 <- read.csv("./output/data_spec.csv", fileEncoding = "latin1")
-dat.art <- read.csv("./output/data_art.csv", fileEncoding = "latin1")
 shp.Ger    <- read_sf("./data/shp/Germany_FS.shp")
 
 pp.mig <- read.csv("./output/Predictions_m2_Migration_zinb_Dmat_oH_500m.csv", encoding = "latin1")
@@ -78,7 +77,7 @@ Spec.list <- sort(Spec.order)
 ## create folder for saved files (not publication ready)
 if(!dir.exists("./graphs/prefig")) dir.create("./graphs/prefig")
 
-#### plot map ------------------------------------------------------------------
+#### 1) plot map ------------------------------------------------------------------
 ## reduce data to site_short
 dat.mod <- dat.mod[dat.mod$netNr != 100,]
 tmp <- dat.mod %>%
@@ -151,7 +150,7 @@ png("./graphs/Map.png", height = 1600, width = 2000)
 g
 dev.off()
 
-#### plot effort ---------------------------------------------------------------
+#### 2) plot effort ---------------------------------------------------------------
 ## reduce data to site_short
 tmp <- dat.mod[dat.mod$netNr != 100 & dat.mod$species == "Blaumeise",]
 ## merge with legend year
@@ -179,7 +178,7 @@ png("./graphs/Effort.png", height = 1200, width = 2000)
 g
 dev.off()
 
-#### plot phenology
+#### 3) plot phenology ---------------------------------------------------------
 # plot predictions per predictor
 plot3 <- function(preds = pp, sims = ff, x = NULL, y = "fit", 
                   xlab = NULL, ylab = dens, basesize = bs, color = "species", c.label = spec,
@@ -236,7 +235,7 @@ Pheno
 dev.off()
 
 
-#### plot coefficient estimate per radius --------------------------------------
+#### 4) plot coefficient estimate per radius --------------------------------------
 ## prepare data
 df <- data.frame()
 for(m in mod.list){
@@ -478,209 +477,3 @@ Trait <- g1[[2]] + g2[[2]] + g3[[2]] + g4[[2]] + plot_layout(nrow = 1)
 png(paste0("./graphs/prefig/Radius_Trait_leg.png"), height = 500, width = 6000)
 Trait
 dev.off()
-
-
-plot.ce(df = df, ce = "jday1", ce.name = "julian day (linear)")
-
-plot.ce(df = df, ce = "jday2", ce.name = "julian day (quadratic)")
-
-plot.ce(df = df, ce = "y2016", ce.name = "year 2016")
-
-# plot.ce(df = df, ce = "y2017", ce.name = "year 2017")
-# plot.ce(df = df, ce = "y2018", ce.name = "year 2018")
-# plot.ce(df = df, ce = "y2019", ce.name = "year 2019")
-# plot.ce(df = df, ce = "y2020", ce.name = "year 2020")
-# plot.ce(df = df, ce = "y2021", ce.name = "year 2021")
-# plot.ce(df = df, ce = "y2022", ce.name = "year 2022")
-# plot.ce(df = df, ce = "y2023", ce.name = "year 2023")
-# plot.ce(df = df, ce = "y2024", ce.name = "year 2024")
-# plot.ce(df = df, ce = "zi", ce.name = "zero inflation")
-
-## plot BayesP
-ggplot(df.sum[df.sum$coef %in% c("dist", "maize", "woodS", "weed", "jday1", "jday2"),]) + 
-  geom_point(aes(x = BayesP, y = species, color = radius, pch = robust), 
-             size = 3, alpha = 0.7, stroke = 1.5) +
-  facet_wrap(~coef) +
-  scale_color_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  scale_shape_manual(values = c("no" = 1, "yes" = 16)) +
-  labs(x = "Bayes p-value", y = "species") +
-  theme_minimal(base_size = 20) +
-  theme(legend.position = "top")
-
-# ggplot(df.sum[df.sum$coef %in% c("y2016", "y2017", "y2018", "y2019", "y2020", "y2021", "y2022", "y2023", "y2024"),]) + 
-#   geom_point(aes(x = BayesP, y = species, color = radius, pch = robust), 
-#              size = 3, alpha = 0.7, stroke = 1.5) +
-#   facet_wrap(~coef) +
-#   scale_color_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-#   scale_shape_manual(values = c("no" = 1, "yes" = 16)) +
-#   labs(x = "Bayes p-value", y = "species") +
-#   theme_minimal(base_size = 20) +
-#   theme(legend.position = "top")
-
-#### plot predictors per model -------------------------------------------------
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = distance_m), alpha = 0.5, binwidth = 10) +
-  labs(x = "distance to edge [m]") +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_dist.png", height = 15, width = 20)
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = distance_m), alpha = 0.5, binwidth = 0.1) +
-  labs(x = "distance to edge [m]") +
-  scale_x_log10() +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_dist_log.png", height = 15, width = 20)
-
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = prop_weed/100), alpha = 0.5, binwidth = 0.05) +
-  labs(x = "weed infestation") +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_weed.png", height = 15, width = 20)
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = (prop_weed/100) + 0.005), alpha = 0.5, binwidth = 0.2) +
-  labs(x = "weed infestation") +
-  scale_x_log10() +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_weed_log.png", height = 15, width = 20)
-
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = decade), alpha = 0.5, binwidth = 1) +
-  labs(x = "decade") +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_decade.png", height = 15, width = 20)
-
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = woodS_1000m/100, fill = "1", color = "1"), alpha = 0.5, binwidth = 0.05) +
-  geom_histogram(aes(x = woodS_750m/100,  fill = "0.75", color = "0.75"), alpha = 0.5, binwidth = 0.05) +
-  geom_histogram(aes(x = woodS_500m/100,  fill = "0.5", color = "0.5"), alpha = 0.5, binwidth = 0.05) +
-  scale_fill_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  scale_color_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  labs(x = "proportion of woods and forests") +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_woodS.png", height = 15, width = 20)
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = woodS_1000m/100, fill = "1", color = "1"), alpha = 0.5, binwidth = 0.1) +
-  geom_histogram(aes(x = woodS_750m/100,  fill = "0.75", color = "0.75"), alpha = 0.5, binwidth = 0.1) +
-  geom_histogram(aes(x = woodS_500m/100,  fill = "0.5", color = "0.5"), alpha = 0.5, binwidth = 0.1) +
-  scale_fill_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  scale_color_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  labs(x = "proportion of woods and forests") +
-  scale_x_log10() +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_woodS_log.png", height = 15, width = 20)
-
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = maize_1000m/100, fill = "1", color = "1"), alpha = 0.5, binwidth = 0.05) +
-  geom_histogram(aes(x = maize_750m/100,  fill = "0.75", color = "0.75"), alpha = 0.5, binwidth = 0.05) +
-  geom_histogram(aes(x = maize_500m/100,  fill = "0.5", color = "0.5"), alpha = 0.5, binwidth = 0.05) +
-  scale_fill_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  scale_color_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  labs(x = "proportion of maize") +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_maize.png", height = 15, width = 20)
-ggplot(dat.mod[dat.mod$species == "Blaumeise",]) +
-  geom_histogram(aes(x = maize_1000m/100, fill = "1", color = "1"), alpha = 0.5, binwidth = 0.1) +
-  geom_histogram(aes(x = maize_750m/100,  fill = "0.75", color = "0.75"), alpha = 0.5, binwidth = 0.1) +
-  geom_histogram(aes(x = maize_500m/100,  fill = "0.5", color = "0.5"), alpha = 0.5, binwidth = 0.1) +
-  scale_fill_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  scale_color_viridis_d("landscape radius [km]", begin = 0.1, end = 0.9, direction = -1) +
-  labs(x = "proportion of maize") +
-  scale_x_log10() +
-  theme_minimal(base_size = 3*bs) +
-  theme(legend.position = "top")
-#ggsave("./graphs/prefig/hist_maize_log.png", height = 15, width = 20)
-
-
-#### plot arthropods -----------------------------------------------------------
-
-plot.art <- function(data, y, title){
-  data$y <- data[, y]
-  
-  g <- ggplot(data) +
-    geom_point(aes(x = julian_day, y = y, color = as.factor(year), group = as.factor(year)),
-               alpha = 0.5, size = 7, pch = 1, stroke = 4,
-               position = position_dodge(width = 0.2)) +
-    scale_color_viridis_d("Jahr", begin = 0.1, end = 0.8, direction = -1) +
-    xlab("Dekade") +
-    ylab("Arthropodenmasse [g]") +
-    ggtitle(title) +
-    theme_minimal(base_size = 3*bs)  
-  
-  return(g)
-    
-  
-}
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Diptera_0.3mm", title = "Diptera 0-3mm")
-ggsave("./graphs/prefig/Art_Dipt1.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Diptera_3.10mm", title = "Diptera 3-10mm")
-ggsave("./graphs/prefig/Art_Dipt2.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Diptera_.10mm", title = "Diptera >10mm")
-ggsave("./graphs/prefig/Art_Dipt3.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Hemiptera_0.3mm", title = "Hemiptera 0-3mm")
-ggsave("./graphs/prefig/Art_Hemi1.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Hemiptera_3.10mm", title = "Hemiptera 3-10mm")
-ggsave("./graphs/prefig/Art_Hemi2.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Hemiptera_.10mm", title = "Hemiptera >10mm")
-ggsave("./graphs/prefig/Art_Hemi3.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Arachnea_0.3mm", title = "Arachnea 0-3mm")
-ggsave("./graphs/prefig/Art_Arach1.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "mass_g_Arachnea_3.10mm", title = "Arachnea 3-10mm")
-ggsave("./graphs/prefig/Art_Arach2.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "sum_0_3", title = "alle 0-3mm")
-ggsave("./graphs/prefig/Art_All1.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "sum_3_10", title = "alle 3-10mm")
-ggsave("./graphs/prefig/Art_All2.png", height = 15, width = 20)
-
-plot.art(data = dat.art[dat.art$species == "Blaumeise",], 
-         y = "sum_10", title = "alle >10mm")
-ggsave("./graphs/prefig/Art_All3.png", height = 15, width = 20)
-
-ggplot(dat.art[dat.art$species == "Blaumeise",]) +
-  geom_boxplot(aes(y = sum_0_3, x = site_short)) +
-  facet_wrap(~year, scales = "free_x") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-ggplot(dat.art[dat.art$species == "Blaumeise",]) +
-  geom_boxplot(aes(y = sum_3_10, x = site_short)) +
-  facet_wrap(~year, scales = "free_x") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-ggplot(dat.art[dat.art$species == "Blaumeise",]) +
-  geom_boxplot(aes(y = sum_10, x = site_short)) +
-  facet_wrap(~year, scales = "free_x") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-ggplot(dat.art[dat.art$species == "Blaumeise",]) +
-  geom_point(aes(x = sum_0_3, y = sum_3_10), alpha = 0.5)
-ggplot(dat.art[dat.art$species == "Blaumeise",]) +
-  geom_point(aes(x = sum_0_3, y = sum_10), alpha = 0.5)
-ggplot(dat.art[dat.art$species == "Blaumeise",]) +
-  geom_point(aes(x = sum_3_10, y = sum_10), alpha = 0.5)
-
