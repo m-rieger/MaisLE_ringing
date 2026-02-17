@@ -97,16 +97,18 @@ site.sum <- dat.mod %>% group_by(site_short) %>%
             )
 
 ## add area_ha
-site.sum <- left_join(site.sum, dat.site[, c("site_short", "area_ha")], by = "site_short")
+site.sum <- left_join(site.sum, dat.site[, c("site_short", "area_ha", "scheme")], by = "site_short")
 
 site.sum <- site.sum[order(site.sum$site_short),]
 
 site.sum$area_ha <- round(site.sum$area_ha, 1)
 
-site.sum <- site.sum[, c("site_short", "lon", "lat", "area_ha", "nets", "e1000", "dist", "weed", "m500", "w500")]
-colnames(site.sum) <- c("site", "lon", "lat", "area [ha]", "nets", "effort", "dist", "weed", "maize", "AST")
+site.sum <- site.sum[, c("site_short", "scheme", "lon", "lat", "area_ha", "nets", "e1000", "dist", "weed", "m500", "w500")]
+colnames(site.sum) <- c("site", "scheme", "lon", "lat", "area [ha]", "nets", "effort", "dist", "weed", "maize", "AST")
+site.sum$scheme[site.sum$scheme == "professional"] <- "P"
+site.sum$scheme[site.sum$scheme == "voluntary"] <- "V"
 
-kbl(site.sum, caption = "Overview of study <em>sites</em>, including location (<em>lon</em>, <em>lat</em>), <em>area</em>, number of used <em>nets</em> and total <em>effort</em> in 1000 hm², as well as distance to field margin (<em>dist</em>), <em>weed</em> infestation and <em>maize</em> and <em>AST</em> (area covered with shrubs and trees) cover within a 500 m radius (mean (min-max)).",     
+kbl(site.sum, caption = "Overview of study <em>sites</em>, including <em>scheme</em> ('P' = professional, 'V' = volunteer-based), location (<em>lon</em>, <em>lat</em>), <em>area</em>, number of used <em>nets</em> and total <em>effort</em> in 1000 hm², as well as distance to field margin (<em>dist</em>), <em>weed</em> infestation and <em>maize</em> and <em>AST</em> (area covered with shrubs and trees) cover within a 500 m radius (mean (min-max)).",     
     row.names = F, escape = FALSE) %>%
   kable_styling(full_width = FALSE, position = "left") %>%
   scroll_box(width = "900px", height = "750px") %>%
@@ -386,7 +388,7 @@ plot3 <- function(preds = pp, x = NULL, y = "fit",
                   basesize = 12, color = NULL, c.label = NULL, NSpec = NULL){
   preds$x     <- preds[,x]
   preds$y     <- preds[,y]
-  preds$color <- preds[,color]
+  preds$color <- as.factor(preds[,color])
   if(is.null(NSpec)) NSpec <- FALSE
 
  
@@ -475,7 +477,7 @@ ggplotly(g)
 ### maize
 
 ```{r}
-tmp <- pp[[8]]
+tmp <- pp[[7]]
 g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
            color = "species", c.label = "species", NSpec = TRUE)
 ggplotly(g)
@@ -511,49 +513,6 @@ ggplotly(g)
 ```
 ::::
 
-
-## diet
-
-:::: {.panel-tabset}
-
-### maize
-
-```{r}
-tmp <- pp[[2]]
-g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
-           color = "species", c.label = "diet")
-ggplotly(g)
-```
-
-### AST
-
-```{r}
-g <- plot3(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
-           color = "species", c.label = "diet")
-ggplotly(g)
-```
-
-### distance
-```{r}
-g <- plot3(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
-           color = "species", c.label = "diet")
-ggplotly(g)
-```
-
-### weed
-```{r}
-g <- plot3(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
-           color = "species", c.label = "diet")
-ggplotly(g)
-```
-
-### decade
-```{r}
-g <- plot3(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
-           color = "species", c.label = "diet")
-ggplotly(g)
-```
-::::
 
 ## habitat
 
@@ -562,7 +521,7 @@ ggplotly(g)
 ### maize
 
 ```{r}
-tmp <- pp[[3]]
+tmp <- pp[[2]]
 g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
            color = "species", c.label = "habitat")
 ggplotly(g)
@@ -605,7 +564,7 @@ ggplotly(g)
 ### maize
 
 ```{r}
-tmp <- pp[[4]]
+tmp <- pp[[3]]
 g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
            color = "species", c.label = "habitat density")
 ggplotly(g)
@@ -648,7 +607,7 @@ ggplotly(g)
 ### maize
 
 ```{r}
-tmp <- pp[[5]]
+tmp <- pp[[4]]
 g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
            color = "species", c.label = "migration")
 ggplotly(g)
@@ -691,7 +650,7 @@ ggplotly(g)
 ### maize
 
 ```{r}
-tmp <- pp[[6]]
+tmp <- pp[[5]]
 g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
            color = "species", c.label = "lifestyle")
 ggplotly(g)
@@ -734,7 +693,7 @@ ggplotly(g)
 ### maize
 
 ```{r}
-tmp <- pp[[7]]
+tmp <- pp[[6]]
 g <- plot3(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",], 
            color = "species", c.label = "Red List GER")
 ggplotly(g)

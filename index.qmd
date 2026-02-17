@@ -1,5 +1,5 @@
 ---
-title: Determinants of songbird abundance and diversity in maize fields during the post-breeding and migration periods
+title: "Maize fields as post-breeding habitat for songbirds: influence of landscape structure, field margins, and weed infestation"
 author:
   - name: Mirjam R. Rieger
     email: mrieger@posteo.de
@@ -18,16 +18,28 @@ author:
         name: Carl von Ossietzky Universität Oldenburg, Institut für Biologie und Umweltwissenschaften
         city: Ammerländer Heerstraße 114-118, 26129 Oldenburg
         country: Germany  
+  - name: László Kövér
+    email: koverl@agr.unideb.hu
+    orcid: 0000-0001-5368-3691
+    affiliations:
+      - id: UD
+        name: University of Debrecen, Department of Nature Conservation Zoology and Game Management
+        city: Boszormenyi str. 138, 4032 Debrecen
+        country: Hungary  
   - name: Thomas K. Gottschalk
     email: gottschalk@hs-rottenburg.de
     orcid: 0000-0002-8951-386X
     affiliations:
       - ref: HFR
 abstract: |
-  Agricultural landscapes cover nearly half of the world’s habitable land surface, and their biodiversity value depends strongly on crop type, management intensity, and landscape context. Although maize (*Zea mays*) cultivation has expanded rapidly worldwide and is generally considered of low value for birds during the breeding season, maize fields may provide important habitat for songbirds during late summer and autumn by offering structurally intact vegetation, shelter, and food. However, evidence for this role remains limited and variable, as most existing studies are small-scale and short-term.
-  To identify the factors shaping songbird abundance and diversity in maize fields during late summer and autumn, we conducted a large-scale, long-term study in 77 maize fields across Germany from 2016 to 2024. Bird abundance and species diversity were assessed using mist-net captures, and related to landscape context and field characteristics, including distance to field margins, surrounding habitat composition at multiple spatial scales, and weed infestation.
-  Analyses using generalized linear mixed models showed that bird abundance and species diversity declined with increasing maize cover at the landscape scale. The importance of forest cover and woody structures for birds varied greatly depending on the species, but overall had a clearly positive influence on species diversity. At the field level, weed infestation consistently had a positive influence on bird numbers and diversity, whereas increasing distance from field margins had a negative influence.
-  Overall, our results demonstrate that maize fields can be managed to enhance their ecological value as post-breeding and stopover habitat for songbirds. Promoting heterogeneous landscapes with spatially dispersed maize, smaller fields with extensive margins, and moderate weed presence can increase bird abundance and diversity.
+  Agricultural landscapes cover nearly half of Europe’s habitable land surface and are central for biodiversity restoration under the recently adopted EU Nature Restoration Law. Although maize (*Zea mays*) cultivation has expanded rapidly worldwide and is generally considered of low value for birds during the breeding season, maize fields may provide critical resources for songbirds during late summer and autumn. However, evidence supporting this remains limited, as most existing studies are small-scale and short-term.
+  
+  To identify the factors shaping songbird presence in maize fields during late summer and autumn, we conducted a large-scale, long-term study (2016--2024) in 77 maize fields across Germany. We assessed bird abundance and species diversity using mist-net captures, and analysed relationships with distance to field margins, surrounding habitat compositions at multiple spatial scales, and weed infestation.
+  
+  Results showed that bird abundance and species diversity declined with increasing maize cover at the landscape scale, while the importance forest cover and woody structures varied greatly depending on the species, with an overall positive influence on species diversity. At the field level, increased weed infestation and proximity to field margins consistently had a positive influence on bird numbers and diversity.
+  
+  Overall, our results demonstrate that promoting heterogeneous landscapes, smaller fields with extensive margins, and moderate weed presence can increase bird abundance and diversity in maize fields. Our findings provide farmers and policymakers with evidence-based options for aligning agricultural practices with the legally binding biodiversity restoration goals under the the EU Nature Restoration Law.
+  
   **Keywords**: agriculture, bird ringing, corn, field margin, Passerines, weed infestation
 keywords:
   - corn
@@ -84,8 +96,10 @@ agri.area$proz_tot <- round(agri.area$maize_tot/agri.area$area*100, 2)
 ```
 
 Agricultural landscapes cover almost half of the world´s habitable land mass and have the potential to serve as important habitats for a wide range of wildlife species [@Assandri2018; @Blount2021; @Ellis2010; @Estrada2022; @Tscharntke2005].
-However, their suitability for biodiversity strongly depends on crop type, management intensity, and landscape context [@Benton2003; @Estrada2022; @Fischer2011Landscape; @Gonthier2014; @Karp2012; @Thiele2012; @Westphal2003].
-In recent decades, maize *Zea mays* cultivation has significantly increased, driven primarily by the demand for livestock feed and the production of renewable energy and bio fuels, covering over 200 million hectares globally [@FAO2025].
+However, their suitability for biodiversity strongly depends on crop type, management intensity, and landscape context [@Benton2003; @Estrada2022; @Fischer2011Landscape; @Thiele2012; @Westphal2003].
+The recently adopted EU Nature Restoration Law aims to halt and reverse biodiversity loss by restoring degraded ecosystems, including agricultural landscapes, through legally binding targets at Member State level [@EU2024RL]. Understanding how intensively cultivated crops such as maize *Zea mays* can support wildlife is therefore of increasing importance to guide the implementation of effective, spatially explicit restoration measures.
+
+In recent decades, maize cultivation has significantly increased, driven primarily by the demand for livestock feed and the production of renewable energy and bio fuels, covering over 200 million hectares globally [@FAO2025].
 In Germany, for example, maize cultivation increased by almost 70% between 2000 and 2024 with an expansion from 4.2% to 7.1% of the terrestrial area [@Eurostat2025Grain; @Eurostat2025Silo; @Eurostat2025UAA].
 
 During the breeding season, maize fields are generally considered to be of limited value for biodiversity, especially for birds [@Best1990; @Fischer2011Landscape].
@@ -119,11 +133,11 @@ However, these four studies are based on limited sample sizes, often restricted 
 
 <!-- Gottschalk 3.4ha -->
 
-To robustly assess and generalize the factors influencing songbird abundance and diversity in maize fields during late summer and autumn, a broader spatial and temporal perspective is required.
-We therefore conducted a long-term, large-scale study from 2016 to 2024, monitoring various maize fields across Germany.
-We recorded bird numbers and species diversity by trapping them with mist nets placed in the maize fields, covering a wide range of landscape contexts, field sizes, and cultivation practices.
-Our study examines the influence of field- and landscape-scale characteristics on songbird abundance and diversity in maize fields, including (i) weed infestation, (ii) distance to field margins, and (iii) the surrounding habitat composition at multiple spatial scales, namely maize, as well as forests and woody structures.
-By doing so, we aim to develop evidence-based criteria to enhance the ecological value of maize fields for songbirds during post-breeding and migration periods.
+To robustly assess and generalize the factors influencing songbird abundance and diversity in maize fields during late summer and autumn, we conducted a large-scale, long-term study from 2016 to 2024 in 77 maize fields across Germany.
+We recorded bird numbers and species diversity by trapping them with mist-nets placed in the maize fields, covering a wide range of landscape contexts, field sizes, and cultivation practices.
+Our study examines the influence of field- and landscape-scale characteristics on songbird abundance and diversity in maize fields, including (i) weed infestation, (ii) distance to field margins, and (iii) the surrounding habitat composition at multiple spatial scales, (maize, as well as forests and woody structures).
+Our study aims to provide evidence on how maize fields can support songbirds during post-breeding and migration periods, offering insights that are relevant for achieving biodiversity restoration goals outlined in the EU Nature Restoration Law.
+
 
 # Methods
 
@@ -132,7 +146,7 @@ By doing so, we aim to develop evidence-based criteria to enhance the ecological
 Between 2016 and 2024, standardized bird ringing [@Anderson2009] was conducted on a total of 77 maize fields (covering more than 1500 ha) across Germany to investigate avian use of maize crops (@fig-map).
 All ringing activities were carried out under permits issued by the relevant national bird ringing centers and local authorities, in compliance with applicable legal and ethical guidelines (see Ethical Statement).
 
-Fieldwork typically began in mid-July, coinciding with the period when maize fields provided suitable habitat and food resources for birds (i.e. when maize plants were shortly before or within their flowering period, reaching a height of around 150 cm).
+Fieldwork began in mid-July, coinciding with the period when maize fields provided suitable habitat and food resources for birds (i.e. when maize plants were shortly before or within their flowering period, reaching a height of around 150 cm).
 Ringing efforts continued until the harvest of the maize crops, which occurred between late August and early November, depending on crop type and regional and annual variations in agricultural schedules.
 For a detailed overview of trapping effort, see Supplement section 1.2.
 The study design was based on two complementary approaches:
@@ -145,10 +159,10 @@ The study design was based on two complementary approaches:
      Within each region, a broad range of maize fields was selected to represent diverse landscape contexts (low to high proportion of maize and proportion of forests and woody structures), field sizes from 0.4 to 147 ha, and organic as well as conventional management practices.
      This ensured a high degree of variability and ecological representativeness.
 
-Standardized mist-netting protocols were employed to ensure consistency across study sites and years, namely removing one line of maize plants to set up the mist nets, a minimum total net length of 25 m (range: 27--192 m) with a mesh size of 16 $\times$ 16 mm, and at least ten ringing sessions lasting at minimum 4 h per site and year (range: 5--23 days).
-Due to early harvests, some sites failed to conduct ten ringing sessions and we excluded sites if the total time that mist nets were open was below 30 h (range: 31--108 h).
+Standardized mist-netting protocols were employed to ensure consistency across study sites and years, namely removing one line of maize plants to set up the mist-nets, a minimum total net length of 25 m (range: 27--192 m) with a mesh size of 16 $\times$ 16 mm, and at least ten ringing sessions lasting at minimum 4 h per site and year (range: 5--23 days).
+Due to early harvests, some sites failed to conduct ten ringing sessions and we excluded sites if the total time that mist-nets were open was below 30 h (range: 31--108 h).
 To avoid attracting birds, installation of playbacks or supplementary food were not permitted.
-Per trapped bird we recorded several parameters, of which the species, ring number, date, time, and the number of the net were relevant for our study.
+Per trapped bird we recorded several parameters, of which species, ring number, date, time, and the number of the net were considered in this study.
 
 <!-- (Manuscript: Fig: Map of sites per year, mark professional ringing) -->
 
@@ -164,9 +178,9 @@ The accuracy of the net locations is therefore approximately 5-10 m.
 
 ### Weed infestation
 
-To determine the weed infestation around each mist net, the proportion of the ground covered by weeds was estimated in 5% classes.
+To determine the weed infestation around each mist-net, the proportion of the ground covered by weeds was estimated in 5% classes.
 For this we considered the ground underneath the nets as well as adjacent maize rows.
-This approach was chosen to compensate for potential bias caused by the installation of the mist nets, which can lead to increased weed growth due to higher solar radiation and precipitation, or by the manual removal of emerging plants beneath the nets. 
+This approach was chosen to compensate for potential bias caused by the installation of the mist-nets, which can lead to increased weed growth due to higher solar radiation and precipitation, or by the manual removal of emerging plants beneath the nets. 
 At least one estimate per net and month was recorded to account for spatial and temporal variation. All plant species except maize were included.
 
 ### Distance to field margin
@@ -198,7 +212,7 @@ Results on species-habitat relationships were used to infer criteria for a songb
 
 We modelled abundance per species for the most abundant 13 species, being trapped on more than 2.5% of all trapping occasions (see @fig-res1 for species list), since less abundant species comprised a high number of zero observations (\> 97.5%), leading to convergence problems.
 Abundance was quantified as the number of individuals trapped per species, net, and decade (ten-day period within a year).
-Initial captures and recaptures of previously ringed individuals were not distinguished (recapture rate 9.8%) as both repeated visits by the same individuals and the absence of such visits contribute to assessing the attractiveness of maize fields to songbirds.
+Initial captures and recaptures of previously ringed individuals were not distinguished, as both repeated visits by the same individuals and the absence of such visits contribute to assessing the attractiveness of maize fields to songbirds.
 To account for variation in trapping effort -- specifically differences in trapping duration and net area (h\*m²) -- we included *effort* as an offset term in the models.
 The resulting density thus represents the number of individuals trapped per 1,000 hm², corresponding, for example, to four hours of trapping with a 250 m² net or 40 hours of trapping with a 25 m² net.
 
@@ -301,7 +315,7 @@ The three most abundant species were Blue Tit with 1,818 individuals (19.6% of a
 ## Phenology
 Overall, both bird abundance and species diversity increased towards the end of the season (@fig-res), with species diversity peaking early in October (decade 28). Among the different migration strategies, only long-distance migrants reached their highest densities earlier in the season, in late August and early in September (decade 24). In contrast, resident species and short-distance migrants attained their highest densities in maize fields toward the end of the season (@fig-res).
 
-![Phenology of abundance per migration strategy (left) and species diversity (right) in maize fields (model with 0.5 km landscape scale). Displayed are median model predictions (bold lines) and a subset of 100 draws from the posterior distribution (thin lines). For predictions, other covariates were set to their mean values. See Supplement **section XX** for further trait groups and species showing predicted abundance per decade.  _Reference for decade of the year: end of July/start of August = decade 21, end of August/start of September = decade 24, end of September/start of October = decade 27, end of October/start of November = decade 30_](graphs/Results_Pheno.png){#fig-res width="100%"}
+![Phenology of abundance per migration strategy (left) and species diversity (right) in maize fields (model with 0.5 km landscape scale). Displayed are median model predictions (bold lines) and a subset of 100 draws from the posterior distribution (thin lines). For predictions, other covariates were set to their mean values. See Supplement section 2 for further trait groups and species showing predicted abundance per decade.  _Reference for decade of the year: end of July/start of August = decade 21, end of August/start of September = decade 24, end of September/start of October = decade 27, end of October/start of November = decade 30_](graphs/Results_Pheno.png){#fig-res width="100%"}
 
 
 
@@ -346,14 +360,13 @@ When comparing the influence of maize and AST, many species and trait groups exh
 However, four species and six trait groups -- such as Reed Warbler, Reed Bunting, Yellowhammer, Tree Sparrow, birds associated with farmland and wetlands, open habitats as well as long-distance migrants, bird with terrestrial lifestyle and vulnerable and near threatened species -- showed consistently negative relationships with both, cover of maize and AST.
 In contrast, on smaller scales, the abundance of Robins was highest in landscapes showing high percent cover of both maize and AST (@fig-res1, @fig-res2).
 
-![Distribution of coefficient estimates of the relationship between abundance of different species as well as species diversity with different net-specific parameters. Models were run on three different landscape scales to investigate the influence of land-use cover in the vicinity of 0.5 km, 0.75 km, 1 km of each mist net. Negative coefficient estimates indicate a negative relationship and positive estimates a positive relationship between abundance or diversity with the respective parameter. Each coefficient estimate is based on 4000 simulations. If the 95% (90%) credible interval is below or above zero, this is labelled with a respective bold (narrow) star. See Supplement section 2 for further figures showing predicted abundance and species diversity per parameter.](graphs/Results_SpecDiv.png){#fig-res1 width="100%"}
+![Distribution of coefficient estimates of the relationship between abundance of different species as well as species diversity with different net-specific parameters. Models were run on three different landscape scales to investigate the influence of land-use cover in the vicinity of 0.5 km, 0.75 km, 1 km of each mist-net. Negative coefficient estimates indicate a negative relationship and positive estimates a positive relationship between abundance or diversity with the respective parameter. Each coefficient estimate is based on 4000 simulations. If the 95% (90%) credible interval is below or above zero, this is labelled with a respective bold (narrow) star. See Supplement section 2 for further figures showing predicted abundance and species diversity per parameter.](graphs/Results_SpecDiv.png){#fig-res1 width="100%"}
 
 ![Distribution of coefficient estimates of the relationship between abundance of different trait groups with different net-specific parameters. See @fig-res1 for legend and further explanations. *Reference for habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Reference for Red List categories: \* = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened*](graphs/Results_Traits.png){#fig-res2 width="100%"}
 
 # Discussion
 
-The main findings of our study can be summarized as follows: At the landscape scale, bird species diversity and abundance decreased with increasing maize field cover, which was most pronounced at a 0.5 km scale.
-At the site level, weed infestation of maize fields showed consistent positive influences and distance to field margins negative influences on bird numbers and diversity. Overall abundance and species diversity increased towards the end of the season.
+Our results directly address the challenges posed by the EU Nature Restoration Law by demonstrating that the importance of landscape context for birds using maize fields varies markedly depending on spatial scale and across species and trait groups. The following points are particularly noteworthy. At the landscape scale, bird species diversity and abundance decreased with increasing maize field cover, with the strongest effects observed at the 0.5 km scale. At the field level, weed infestation had consistently positive effects, while distance to field margins had negative effects on bird numbers and diversity. Overall abundance and species diversity increased towards the end of the season. 
 
 
 ## Phenology
@@ -386,9 +399,8 @@ Field margins promoted by small-scale farming are likely particularly important 
 
 Our results show that the importance of landscape context for birds using maize fields varies with spatial scale and among species and trait groups.
 
-For several species, increasing the radius resulted in stronger, mostly more negative relationships with maize proportion, indicating that a larger amount of maize fields within the broader landscape constrains maize field use by songbirds.
-This pattern was most pronounced for Tree Sparrow, Yellowhammer, Reed Bunting, and terrestrial birds in general.
-Although there is a lack of data concerning the spatial range of many passerines during stopover and post-breeding, @Calladine2004 reported mean travelling distances of approximately 1,250 m for Tree Sparrow, and 600 m for Yellowhammer during winter, underscoring the importance of a larger landscape context for both.
+For several species, increasing the spatial scale resulted in stronger, generally more negative relationships with maize cover, indicating that a higher proportion of maize fields in the broader surrounding landscape limits their use by songbirds.
+This effect was particularly pronounced for Tree Sparrow, Yellowhammer, Reed Bunting, and terrestrial birds in general. For many passerines, data on spatial range during stopovers and post-breeding periods remain scarce. However, @Calladine2004 reported mean movement distances of approximately 1,250 m for Tree Sparrow, and 600 m for Yellowhammer in winter, highlighting the importance of considering the larger landscape context.
 
 In contrast, other species as well as species diversity showed more indifferent responses for the proportion of maize fields at larger radii, implying a greater reliance on the immediate field surroundings.
 This was especially evident for residents and long-distance migrants, as well as Blue Tit, Great Tit, Marsh Warbler, Reed Warbler, and Robin. The latter two are also known to use only small areas of less than 300 m radius at their stopover sites during migration [@Chernetsov2001; @Chernetsov2006]. Comparable results were also found by @Morelli2013 for overall bird richness during the breeding season, where land cover diversity best explained bird richness in cultivated areas when considered at smaller scales (50 to 375m).
@@ -425,18 +437,18 @@ Taken together, these results indicate that many species and trait groups respon
 A notable exception were Robins, showing a preference for landscapes combining high proportions of both maize and AST. This suggests that Robins, a typical ground-dwelling bird species of wooded and bushy habitats [@Cramp1993], could benefit from an overall dense cover provided by maize fields and nearby woody structures, potentially using both for shelter and foraging during post-breeding and migration.
 
 In terms of agricultural practices, our findings suggest that extensive maize monocultures especially in large, homogeneous blocks should be avoided. 
-Our data clearly show that the spatial concentration of maize fields, for example near biogas plants, is detrimental to almost all bird species. Our study additionally supports the general recommendations to maintain heterogeneous crop mosaics [@Priyadarshana2024, @Tscharntke2005] and underscores the importance of cultivating only a moderate proportion of a single crop species in agricultural landscapes.
+Our data clearly show that the spatial concentration of maize fields, for example near biogas plants, is detrimental to almost all bird species. Our study additionally supports the general recommendations to maintain heterogeneous crop mosaics [@Priyadarshana2024; @Tscharntke2005] and underscores the importance of cultivating only a moderate proportion of a single crop species in agricultural landscapes.
 
 Woody structures and forest on the contrary increased overall species diversity, highlighting their importance for maintaining structurally complex landscapes. However, some species showed higher abundances in maize fields of more open landscapes.
 This indicates that conservation measures should be tailored to target species or species groups. 
 A balanced landscape that combines open spaces and areas with a high vertical structure is likely to attract a particularly high number of bird species.
 
 ## Limitations
-With regard to species diversity and overall species composition, it is important to note that although mist netting currently represents one of the most effective methods for surveying bird use of dense habitats, the use of nets with a mesh size of 16 $\times$ 16 mm likely biases captures toward smaller-bodied species. Larger birds (e.g. Wood pigeon *Columba palumbus* and even thrushes frequently escaping), more wary or experienced individuals (e.g., corvids), and species with high flight agility -- such as swallows -- which are often able to detect and avoid the nets are underrepresented. Consequently, our study provides a comprehensive but incomplete picture of the use of maize fields by birds. Our conclusions therefore primarily apply to small-bodied birds, particularly songbirds.
+With regard to species diversity and overall species composition, it should be noted that although mist netting currently represents one of the most effective methods for recording bird use of dense habitats outside the breeding season, the use of nets with a mesh size of 16 $\times$ 16 mm is likely to result in a bias towards smaller species. Larger birds (e.g. Wood pigeon *Columba palumbus* and even thrushes frequently escaping), more wary or experienced individuals (e.g., corvids), and species with high flight agility -- such as swallows -- which are often able to detect and avoid the nets are underrepresented. Consequently, our study provides a comprehensive but not entirely complete picture of the use of maize fields by birds. Our conclusions therefore apply primarily to small birds, especially songbirds.
 
 # Conclusion
 Overall, our results suggest that maize cultivation can be managed in such a way that its ecological value as stopover and post-breeding habitat for songbirds can be increased without compromising agricultural production.
-High bird densities in maize fields may even provide benefits to farmers through pest control, as birds can reduce populations of herbivorous insects [e.g., @Tremblay2001, @Garfinkel2020]. Our management recommendations are: 
+High bird densities in maize fields may even provide benefits to farmers through pest control, as birds can reduce populations of herbivorous insects (e.g., @Tremblay2001, @Garfinkel2020). Our management recommendations are: 
 
 1) Avoid large maize monocultures and maintain spatially dispersed maize within crop mosaics to increase habitat heterogeneity and thus provide habitat for a wider range of species.
 
@@ -449,8 +461,8 @@ High bird densities in maize fields may even provide benefits to farmers through
 5) Cultivate late-harvested crops like grain maize, still providing shelter and food for songbirds in late autumn.
 
 # Acknowledgements
-We are especially grateful to two groups whose extensive field efforts were essential to the success of this study: the volunteer bird ringers (S. Becker, M. Flade, A.Geiges, C.Grande, E. Haseloff, W. Herrmann, J. Hoffmann, S. Huguenin, M. Hundsdorfer, D. Kästner, S. Klasan, V. Mader, H. Oelke, S. Rudloff, H.Schneider, M. Schönbrodt, T. Stahl, M. Teten) and the student bird ringers and assistants (M. Arold, J. Baudson, K. Greitemann, L. Hausner, T. Härtner, J. Heintel, L. Kempf, H. Knudsen, J. Koch, H. Konrad, M. Ludwig, M. Meinken, A. Nevoigt, E. Niepoth, L. Redetzke, L. Regelmann, A. Rudolph, N. Schöffski, M. Schramma, B. Stolze, A. Tridart, E. Wilhelmi, C. Winter). 
-We also thank László Kövér and Ralf Dittrich for their support in study design and fieldwork, all participating agricultural enterprises, as well as the German ringing centers from Helgoland, Hiddensee, and Radolfzell and other relevant authorities for granting the necessary permits.
+We are especially grateful to two groups of people whose extensive field efforts were essential to the success of this study: the volunteer bird ringers (S. Becker, M. Flade, A.Geiges, C.Grande, E. Haseloff, W. Herrmann, J. Hoffmann, S. Huguenin, M. Hundsdorfer, D. Kästner, S. Klasan, V. Mader, H. Oelke, S. Rudloff, H.Schneider, M. Schönbrodt, T. Stahl, M. Teten) and the student bird ringers and assistants (M. Arold, J. Baudson, K. Greitemann, L. Hausner, T. Härtner, J. Heintel, L. Kempf, H. Knudsen, J. Koch, H. Konrad, M. Ludwig, M. Meinken, A. Nevoigt, E. Niepoth, L. Redetzke, L. Regelmann, A. Rudolph, N. Schöffski, M. Schramma, B. Stolze, A. Tridart, E. Wilhelmi, C. Winter). 
+We also thank Ralf Dittrich and Nils Anthes for their support in study design, all participating agricultural enterprises, as well as the German ringing centers from Helgoland, Hiddensee, and Radolfzell and other relevant authorities for granting the necessary permits.
 
 # Funding
 This work was supported by the German Research Foundation (DFG, grant number GO 1096/5-1), the German Ornithological Society (DO-G), and the German Maize Committee (DMK).
@@ -459,6 +471,8 @@ This work was supported by the German Research Foundation (DFG, grant number GO 
 **Mirjam R Rieger**: Methodology, Validation, Formal analysis, Investigation, Writing - original draft, Visualization, Project administration
 
 **Wieland Heim**: Investigation, Writing - review and editing
+
+**László Kövér**: Conceptualization, Investigation, Writing - review and editing
 
 **Thomas K Gottschalk**: Conceptualization, Methodology, Writing - review and editing, Project administration, Funding acquisition
 
@@ -474,8 +488,8 @@ The authors declare no conflicts of interest.
 
 Data and code to reproduce this study are available from the GitHub repository <https://github.com/m-rieger/MaisLE_net>.
 
-# Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
-*not needed, if not applicable*
+<!-- # Declaration of generative AI and AI-assisted technologies in the manuscript preparation process -->
+<!-- *not needed, if not applicable* -->
 
 # References
 <!-- *up to two authors, for three+ use et al.* -->
