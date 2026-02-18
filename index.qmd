@@ -486,7 +486,7 @@ The authors declare no conflicts of interest.
 
 # Data availability statement
 
-Data and code to reproduce this study are available from the GitHub repository <https://github.com/m-rieger/MaisLE_net>.
+Data and code to reproduce this study are available from the GitHub repository <https://github.com/m-rieger/MaisLE_ringing> [@Rieger2026].
 
 <!-- # Declaration of generative AI and AI-assisted technologies in the manuscript preparation process -->
 <!-- *not needed, if not applicable* -->
