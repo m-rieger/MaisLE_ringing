@@ -1,5 +1,5 @@
 # MaisLE_ringing
-Repository with data, code and manuscript to reproduce results from "Title of manuscript" with link to preprint []()
+Repository with data, code and manuscript to reproduce results from Rieger, M.R., Heim, W., Kövér, L. and Gottschalk, T.K. (2026) Maize fields as post-breeding habitat for songbirds: influence of landscape structure, field margins, and weed infestation (add link to preprint []())
 
 ## abstract
 
@@ -34,5 +34,5 @@ number of days with trapping (*Ndays*), and *area_ha* of the maize field
 
 ### Manuscript
 
-`index.qmd`: Manuscript source file.
+`index.qmd`: Manuscript source file.  
 `/graphs`: Contains figures used in the manuscript and supplement.
