@@ -32,15 +32,11 @@ author:
     affiliations:
       - ref: HFR
 abstract: |
-  Agricultural landscapes cover nearly half of Europe’s habitable land surface and are central for biodiversity restoration under the recently adopted EU Nature Restoration Law. Although maize (*Zea mays*) cultivation has expanded rapidly worldwide and is generally considered of low value for birds during the breeding season, maize fields may provide critical resources for songbirds during late summer and autumn. However, evidence supporting this remains limited, as most existing studies are small-scale and short-term.
-  
-  To identify the factors shaping songbird presence in maize fields during late summer and autumn, we conducted a large-scale, long-term study (2016--2024) in 77 maize fields across Germany. We assessed bird abundance and species diversity using mist-net captures, and analysed relationships with distance to field margins, surrounding habitat compositions at multiple spatial scales, and weed infestation.
-  
-  Results showed that bird abundance and species diversity declined with increasing maize cover at the landscape scale, while the importance forest cover and woody structures varied greatly depending on the species, with an overall positive influence on species diversity. At the field level, increased weed infestation and proximity to field margins consistently had a positive influence on bird numbers and diversity.
-  
-  Overall, our results demonstrate that promoting heterogeneous landscapes, smaller fields with extensive margins, and moderate weed presence can increase bird abundance and diversity in maize fields. Our findings provide farmers and policymakers with evidence-based options for aligning agricultural practices with the legally binding biodiversity restoration goals under the the EU Nature Restoration Law.
-  
-  **Keywords**: agriculture, bird ringing, corn, field margin, Passerines, weed infestation
+  Agricultural landscapes cover nearly half of Europe’s habitable land surface and play a central role in biodiversity restoration under the recently adopted EU Nature Restoration Law. Maize (*Zea mays*) cultivation has expanded rapidly worldwide and is generally considered of low value for birds during the breeding season. However, maize fields may provide critical resources for songbirds in late summer and autumn. Evidence for this remains limited because most existing studies are small in scale and short in duration.
+  To identify factors shaping songbird presence in maize fields during late summer and autumn, we conducted a large-scale, long-term study (2016–2024) across 77 maize fields in Germany. We assessed bird abundance and species diversity using mist-net captures and analysed their relationships with distance to field margins, surrounding habitat composition at multiple spatial scales, and levels of weed infestation.
+  Bird abundance and species diversity declined with increasing maize cover at the landscape scale. The influence of forest cover and woody structures varied substantially among species but had an overall positive effect on diversity. At the field scale, higher weed infestation and proximity to field margins consistently enhanced bird numbers and diversity.
+  Our findings indicate that promoting heterogeneous landscapes, reducing field size, maintaining wide field margins, and allowing moderate weed presence can increase bird abundance and diversity in maize-dominated landscapes. These results provide farmers and policymakers with evidence-based guidance for aligning agricultural practices with the legally binding biodiversity restoration goals under the EU Nature Restoration Law.
+  **Keywords**: agriculture, agroecology, bird ringing, Passerines, Zea mays
 keywords:
   - corn
   - bird ringing
@@ -440,7 +436,7 @@ In terms of agricultural practices, our findings suggest that extensive maize mo
 Our data clearly show that the spatial concentration of maize fields, for example near biogas plants, is detrimental to almost all bird species. Our study additionally supports the general recommendations to maintain heterogeneous crop mosaics [@Priyadarshana2024; @Tscharntke2005] and underscores the importance of cultivating only a moderate proportion of a single crop species in agricultural landscapes.
 
 Woody structures and forest on the contrary increased overall species diversity, highlighting their importance for maintaining structurally complex landscapes. However, some species showed higher abundances in maize fields of more open landscapes.
-This indicates that conservation measures should be tailored to target species or species groups. 
+This indicates that conservation measures should be tailored to target species or species groups which regionally can take profit from maize field during the breeding season, e.g. Northern Lapwing and Little Owl [@Sauerbrei2014] or Little Ringed Plover *Thinornis dubius* [@Vozabulov2019]. 
 A balanced landscape that combines open spaces and areas with a high vertical structure is likely to attract a particularly high number of bird species.
 
 ## Limitations
