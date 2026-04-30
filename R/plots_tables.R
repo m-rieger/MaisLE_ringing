@@ -21,7 +21,7 @@ nsamp <- 1000
 bs <- 14 # base size for plots
 
 mod.list <- c("species", "Migration", "Habitat", "Habitat.Density", 
-              "Primary.Lifestyle", "RedList_DE", "Diversity")
+              "Primary.Lifestyle", "Trophic.Niche", "RedList_DE", "Diversity")
 
 ## data
 ce.500 <- list()
@@ -60,6 +60,7 @@ for(i in mod.list){
 dat.mod <- read.csv("./output/data.csv", fileEncoding = "latin1")
 dat.mod2 <- read.csv("./output/data_spec.csv", fileEncoding = "latin1")
 shp.Ger    <- read_sf("./data/shp/Germany_FS.shp")
+shp.maize    <- read_sf("./data/shp/Germany_maize.gpkg")
 
 pp.mig <- read.csv("./output/Predictions_m2_Migration_zinb_Dmat_oH_500m.csv", encoding = "latin1")
 ff.mig <- read.csv("./output/Predictions_sim_m2_Migration_zinb_Dmat_oH_500m.csv", encoding = "latin1")
@@ -107,8 +108,8 @@ nSites <- st_drop_geometry(shp) %>% group_by(year) %>%
 col.df <- left_join(col.df, nSites, by = "year")
 col.df$year.site <- paste0(col.df$year, " (", col.df$nSites, ")")
 
-g <- ggplot() +
-  geom_sf(data = shp.Ger, fill = "white", color = "#888888", lwd = 1) +
+g1 <- ggplot() +
+  geom_sf(data = shp.Ger, fill = "white", color = "#888888", lwd = 2) +
   #geom_sf(data = shp, color = shp$site.col, size = shp$site.size) +
   geom_sf(data = shp, aes(fill = as.character(year)), size = 3*shp$site.size, color = "#888888", pch = 21) +
   
@@ -146,8 +147,29 @@ g <- ggplot() +
   theme_void(base_size = bs) +
   theme(legend.position = "none")
 
-png("./graphs/Map.png", height = 1600, width = 2000)
-g
+g2 <- ggplot() +
+  geom_sf(data = shp.maize[!is.na(shp.maize$maize_prop),], aes(alpha = maize_prop), 
+          fill = "orange", color = "#333333", lwd = 0.25) +
+  geom_sf(data = shp.maize[is.na(shp.maize$maize_prop),], 
+          fill = "#888888", color = "#333333", lwd = 0.25) +
+  geom_sf(data = shp.Ger, fill = NA, color = "#888888", lwd = 2) +
+
+  geom_sf(data = shp, size =3, color = "#333333") +
+  
+  # scale_fill_grey(name = "prop. of \nmaize") +
+
+  scale_alpha_continuous("prop. of \nmaize") +
+  ## Maßstab
+  annotation_scale(height = unit(1, "cm"), text_cex = 3, width_hint = 0.4, 
+                   style = "ticks", line_width = 4, text_pad = unit(0.5, "cm"),
+                   pad_x = unit(0.5, "cm"), pad_y = unit(0.5, "cm"),) +
+  
+  theme_void(base_size = 3*bs); g2
+
+map <- g1 + g2 + plot_layout(nrow = 1)
+
+png("./graphs/Map.png", height = 1600, width = 2800)
+map
 dev.off()
 
 #### 2) plot effort ---------------------------------------------------------------
@@ -172,13 +194,18 @@ g <- ggplot(tmp) +
   scale_fill_viridis_d(end = 0.9, name = "year (# sites)", direction = 1, option = "inferno") +
   
   theme_light(base_size = 4*bs)  +
-  theme(legend.position = "right")
+  theme(legend.position = "right"); g
 
 png("./graphs/Effort.png", height = 1200, width = 2000)
 g
 dev.off()
 
 #### 3) plot phenology ---------------------------------------------------------
+
+## get labels for secondary axis
+x.val <- c(21.3, 24.4, 27.4, 30.5)
+x.lab <- c("Aug, 1st", "Sep, 1st", "Oct, 1st", "Nov, 1st")
+
 # plot predictions per predictor
 plot3 <- function(preds = pp, sims = ff, x = NULL, y = "fit", 
                   xlab = NULL, ylab = dens, basesize = bs, color = "species", c.label = spec,
@@ -209,7 +236,13 @@ plot3 <- function(preds = pp, sims = ff, x = NULL, y = "fit",
   g <- g +
     xlab(xlab) +
     ylab(ylab) +
-    ylim(0, NA)
+    ylim(0, NA) +
+    ## add second x-axis
+    scale_x_continuous(sec.axis = dup_axis(
+      name = "date",
+      labels = x.lab,
+      breaks = x.val
+    ))
   
   if(spec == "species diversity") g <- g + theme(legend.position = "none")
   if(spec == "migration") g <- g + theme(legend.position = c(0.3, 0.78), 
@@ -229,7 +262,7 @@ g2 <- plot3(preds = pp.sD[pp.sD$pred == "jday",], sims = ff.sD[ff.sD$pred == "jd
       xlab = "decade of the year [10-day interval]", x = "julian_day",
       ylab = "species diversity [number of species]", basesize = bs*3)
 
-Pheno <- g1 + g2 + plot_layout(nrow = 1)
+Pheno <- g1 + g2 + plot_layout(nrow = 1); Pheno
 png(paste0("./graphs/Results_Pheno.png"), height = 1200, width = 2000)
 Pheno
 dev.off()

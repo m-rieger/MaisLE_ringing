@@ -32,7 +32,7 @@ SIM      <- 100
 
 ## species groups used for modelling: c("Migration", "RedList_DE", )
 # groupL   <- c("Migration", "Habitat", "Diet", "Habitat.Density", "Primary.Lifestyle", "RedList_DE")
-groupL   <- c("Migration", "Habitat", "Habitat.Density", "Primary.Lifestyle", "RedList_DE")
+groupL   <- c("Migration", "Habitat", "Habitat.Density", "Primary.Lifestyle", "RedList_DE", "Trophic.Niche")
 
 ## plot settings
 bs       <- 14 # base size
@@ -83,18 +83,22 @@ dat$Habitat[dat$Habitat == "open"] <- "farmland"
 ## identify species without a Red List category
 dat$RedList_DE[is.na(dat$RedList_DE)] <- "*"
 
+## exclude Aquatic predators and Vertivores from Trophic.Niche
+dat$Trophic.Niche[dat$Trophic.Niche %in% c("Aquatic predator", "Vertivore")] <- NA
+
 ## get trait list
 xx <- unique(dat[, c("species_sci", "species", groupL)])
 
 #dat$Diet[dat$Diet == "herbivore"] <- "granivorous"
 #dat$Diet[dat$Diet == "carnivorous"] <- "invertebrates"
 
-table(dat$Migration)
-table(dat$Habitat)
-#table(dat$Diet)
-table(dat$Habitat.Density)
-table(dat$Primary.Lifestyle)
-table(dat$RedList_DE)
+table(xx$Migration)
+table(xx$Habitat, xx$species)
+#table(xx$Diet)
+table(xx$Habitat.Density)
+table(xx$Primary.Lifestyle)
+table(xx$RedList_DE)
+table(xx$Trophic.Niche, xx$species)
 
 ## define whether year should be part of the model (<- dat$year) or not (<- 1)
 dat$year2 <- 1 

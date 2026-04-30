@@ -28,9 +28,9 @@ if(type == "m1") {
 
 ## specify data and variables for m2
 if(type == paste0("m2_", group)) {
-  
+  tmp <- dat[!is.na(dat[, group]),]
   ## summarize data based on group
-  tmp <- dat %>% group_by(across(all_of(c(group, "site_short", "netNr", "decade")))) %>%
+  tmp <- tmp %>% group_by(across(all_of(c(group, "site_short", "netNr", "decade")))) %>%
     summarize(NInd_pd = sum(NInd_pd),
               dens_1000hm2 = sum(dens_1000hm2),
               NSpec_pg = n(), .groups = "drop")
