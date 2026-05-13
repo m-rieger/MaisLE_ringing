@@ -392,7 +392,7 @@ plot.ce <- function(df, ce, ce.name, facet, df.s, pos, neg, min){
     # xlim(quantile(unlist(df[,cols]), probs = 0.025), quantile(unlist(df[,cols]), probs = 0.975)) +
     xlim(min, min+2.2) + # -2.5, 0.75
     # scale_y_reverse(limits = rev(levels(df$species))) +
-    theme_minimal(base_size = 8*bs) +
+    theme_minimal(base_size = 7*bs) +
     # theme(legend.position = "none",
     #       axis.title = element_blank())
     theme(legend.position = "none")
@@ -422,7 +422,7 @@ plot.ce <- function(df, ce, ce.name, facet, df.s, pos, neg, min){
     xlim(min, min+2.2) + # -2.5, 0.75
     scale_y_continuous(breaks = c(-3, 0, 3), labels = c(" ", "Mönchsgrasmücke", " ")) +
     ylab("species") +
-    theme_classic(base_size = 8*bs)  + 
+    theme_classic(base_size = 7*bs)  + 
     theme(axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
           axis.title.x = element_blank(),
