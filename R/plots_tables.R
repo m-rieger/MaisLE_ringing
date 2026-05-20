@@ -64,6 +64,8 @@ shp.maize    <- read_sf("./data/shp/Germany_maize.gpkg")
 
 pp.mig <- read.csv("./output/Predictions_m2_Migration_zinb_Dmat_oH_500m.csv", encoding = "latin1")
 ff.mig <- read.csv("./output/Predictions_sim_m2_Migration_zinb_Dmat_oH_500m.csv", encoding = "latin1")
+pp.food <- read.csv("./output/Predictions_m2_Trophic.Niche_zinb_Dmat_oH_500m.csv", encoding = "latin1")
+ff.food <- read.csv("./output/Predictions_sim_m2_Trophic.Niche_zinb_Dmat_oH_500m.csv", encoding = "latin1")
 pp.sD <- read.csv("./output/Predictions_m3_pois_Dmat_oH_NSpec_500m.csv", encoding = "latin1")
 ff.sD <- read.csv("./output/Predictions_sim_m3_pois_Dmat_oH_NSpec_500m.csv", encoding = "latin1")
 
@@ -109,19 +111,20 @@ col.df <- left_join(col.df, nSites, by = "year")
 col.df$year.site <- paste0(col.df$year, " (", col.df$nSites, ")")
 
 g1 <- ggplot() +
-  geom_sf(data = shp.Ger, fill = "white", color = "#888888", lwd = 2) +
+  geom_sf(data = shp.Ger, fill = "white", color = "#888888", lwd = 0.25) +
   #geom_sf(data = shp, color = shp$site.col, size = shp$site.size) +
-  geom_sf(data = shp, aes(fill = as.character(year)), size = 3*shp$site.size, color = "#888888", pch = 21) +
+  geom_sf(data = shp, aes(fill = as.character(year)), size = 0.5*shp$site.size, 
+          color = "#888888", pch = 21, stroke = 0.1) +
   
   geom_sf_text(data = shp[shp$site_short == "BW-Z3-22",],
-               aes(label = "Rottenburg"), size = 14,
+               aes(label = "Rottenburg"), size = 3,
                nudge_y = 0.3, nudge_x = 0.5) +
   
   geom_sf_text(data = shp[shp$site_short == "BB-C2-23",],
-               aes(label = "Seelow"), size = 14,
+               aes(label = "Seelow"), size = 3,
                nudge_y = 0.3, nudge_x = 0.6) +
   geom_sf_text(data = shp[shp$site_short == "NI-N2-24",],
-               aes(label = "Cloppenburg"), size = 14,
+               aes(label = "Cloppenburg"), size = 3,
                nudge_y = -0.3, nudge_x = 0) +
   
   
@@ -130,45 +133,51 @@ g1 <- ggplot() +
   
   geom_point(data = col.df, 
              aes(x = x, y = y, fill = as.character(year)),
-             size = 3*col.df$site.size, pch = 21, color = "grey55") + 
+             size = 0.55*col.df$site.size, pch = 21, color = "grey55", stroke = 0.1) + 
   geom_text(data = col.df, aes(x = x + 0.6, y = y, label = year.site), 
-            vjust = 0.5, hjust = 0, size = 14) +
+            vjust = 0.5, hjust = 0, size = 3) +
   geom_text(aes(x = unique(col.df$x)-0.1, y = 52), label = "year (# sites)", 
-            vjust = 0.5, hjust = 0, size = 16) + # legend title
+            vjust = 0.5, hjust = 0, size = 3.5) + # legend title
   
   scale_fill_viridis_d(end = 0.9, name = "year", direction = 1, option = "inferno") +
   scale_color_viridis_d(end = 0.9, name = "year", direction = 1, option = "inferno") +
   
   ## Maßstab
-  annotation_scale(height = unit(1, "cm"), text_cex = 3, width_hint = 0.4, 
-                   style = "ticks", line_width = 4, text_pad = unit(0.5, "cm"),
-                   pad_x = unit(0.5, "cm"), pad_y = unit(0.5, "cm"),) +
+  annotation_scale(height = unit(0.2, "cm"), text_cex = 0.8, width_hint = 0.4, 
+                   style = "ticks", line_width = 2, text_pad = unit(0.15, "cm"),
+                   pad_x = unit(0.15, "cm"), pad_y = unit(0.15, "cm"),) +
   
   theme_void(base_size = bs) +
   theme(legend.position = "none")
 
 g2 <- ggplot() +
   geom_sf(data = shp.maize[!is.na(shp.maize$maize_prop),], aes(alpha = maize_prop), 
-          fill = "orange", color = "#333333", lwd = 0.25) +
+          fill = "orange", color = "#333333", lwd = 0.1) +
   geom_sf(data = shp.maize[is.na(shp.maize$maize_prop),], 
-          fill = "#888888", color = "#333333", lwd = 0.25) +
-  geom_sf(data = shp.Ger, fill = NA, color = "#888888", lwd = 2) +
+          fill = "#888888", color = "#333333", lwd = 0.1) +
+  geom_sf(data = shp.Ger, fill = NA, color = "#888888", lwd = 0.5) +
 
-  geom_sf(data = shp, size =3, color = "#333333") +
+  geom_sf(data = shp, size =1, color = "#333333") +
   
   # scale_fill_grey(name = "prop. of \nmaize") +
 
   scale_alpha_continuous("prop. of \nmaize") +
   ## Maßstab
-  annotation_scale(height = unit(1, "cm"), text_cex = 3, width_hint = 0.4, 
-                   style = "ticks", line_width = 4, text_pad = unit(0.5, "cm"),
-                   pad_x = unit(0.5, "cm"), pad_y = unit(0.5, "cm"),) +
+  annotation_scale(height = unit(0.2, "cm"), text_cex = 0.8, width_hint = 0.4, 
+                   style = "ticks", line_width = 2, text_pad = unit(0.15, "cm"),
+                   pad_x = unit(0.15, "cm"), pad_y = unit(0.15, "cm"),) +
   
-  theme_void(base_size = 3*bs); g2
+  theme_void(base_size = bs) +
+  theme(legend.key.size = unit(0.5, 'cm'), #change legend key size
+        legend.key.height = unit(0.5, 'cm'), #change legend key height
+        legend.key.width = unit(0.5, 'cm'), #change legend key width
+        legend.title = element_text(size=9), #change legend title font size
+        legend.text = element_text(size=8)) ; g2
 
 map <- g1 + g2 + plot_layout(nrow = 1)
 
-png("./graphs/Map.png", height = 1600, width = 2800)
+#png("./graphs/Map.png", height = 1600, width = 2800, units = "mm", quality = 100)
+jpeg("./graphs/Fig1.jpeg", height = 110, width = 190, units = "mm", quality = 100, res = 1000)
 map
 dev.off()
 
@@ -216,19 +225,19 @@ plot3 <- function(preds = pp, sims = ff, x = NULL, y = "fit",
   
   # base plot 
   g <- ggplot(data = preds, aes(x = x, y = y)) +
-    theme_light(base_size = basesize)
+    theme_light(base_size = 0.6*basesize)
   
   # add random draws for confidence lines (if plot.sim = TRUE)
   if(plot.sim) {
     for(i in 1:nsim) {
       preds$lsim <- sims[,i]
-      g <- g + geom_line(data = preds, aes(x = x, y = lsim, color = color), alpha = 0.05, lwd = 1)
+      g <- g + geom_line(data = preds, aes(x = x, y = lsim, color = color), alpha = 0.05, lwd = 0.5)
     }
   }
   # add predictions
   g <- g +
     
-    geom_line(data = preds, aes(x = x, y = y, color = color), lwd = 3) +
+    geom_line(data = preds, aes(x = x, y = y, color = color), lwd = 1) +
     
     scale_color_viridis_d(c.label, direction = -1, end = 0.9) +
     scale_fill_viridis_d(c.label, direction = -1, end = 0.9)
@@ -245,25 +254,37 @@ plot3 <- function(preds = pp, sims = ff, x = NULL, y = "fit",
     ))
   
   if(spec == "species diversity") g <- g + theme(legend.position = "none")
-  if(spec == "migration") g <- g + theme(legend.position = c(0.3, 0.78), 
-                                         legend.box.background = element_rect(colour = "grey30"))
+  if(spec %in% c("migration", "trophic niche")) g <- g + theme(legend.position = c(0.3, 0.85), 
+                                         legend.box.background = element_rect(colour = "grey30"),
+                                         legend.key.size = unit(0.2, 'cm'), #change legend key size
+                                         legend.key.height = unit(0.2, 'cm'), #change legend key height
+                                         legend.key.width = unit(0.5, 'cm'), #change legend key width
+                                         legend.title = element_text(size=7), #change legend title font size
+                                         legend.text = element_text(size=6))
   
   return(g)
   
 }
 
+
 gsim <- 100
 spec <- "migration"
 g1 <- plot3(preds = pp.mig[pp.mig$pred == "jday",], sims = ff.mig[ff.mig$pred == "jday",], 
       xlab = "decade of the year [10-day interval]", x = "julian_day",
-      ylab = "density [ind. per 1000 hm²]", basesize = bs*3)
-spec <- "species diversity"
-g2 <- plot3(preds = pp.sD[pp.sD$pred == "jday",], sims = ff.sD[ff.sD$pred == "jday",], 
-      xlab = "decade of the year [10-day interval]", x = "julian_day",
-      ylab = "species diversity [number of species]", basesize = bs*3)
+      ylab = "density [ind. per 1000 hm²]", basesize = bs)
+spec <- "trophic niche"
+g2 <- plot3(preds = pp.food[pp.food$pred == "jday",], sims = ff.food[ff.food$pred == "jday",], 
+            xlab = "decade of the year [10-day interval]", x = "julian_day",
+            ylab = "density [ind. per 1000 hm²]", basesize = bs)
 
-Pheno <- g1 + g2 + plot_layout(nrow = 1); Pheno
-png(paste0("./graphs/Results_Pheno.png"), height = 1200, width = 2000)
+spec <- "species diversity"
+g3 <- plot3(preds = pp.sD[pp.sD$pred == "jday",], sims = ff.sD[ff.sD$pred == "jday",], 
+      xlab = "decade of the year [10-day interval]", x = "julian_day",
+      ylab = "species diversity [number of species]", basesize = bs)
+
+Pheno <- g1 + g2 + g3 + plot_layout(nrow = 1); Pheno
+# png("./graphs/Results_Pheno.png", height = 1000, width = 2400)
+jpeg("./graphs/Fig2.jpeg", height = 70, width = 190, units = "mm", quality = 100, res = 1000)
 Pheno
 dev.off()
 
@@ -342,6 +363,14 @@ df.sum <- pivot_longer(df.sum, names_to = "coef", values_to = "BayesP", cols = a
 df.sum$robust <- "no"
 df.sum$robust[df.sum$BayesP <= 0.025 | df.sum$BayesP >= 0.975] <- "yes"
 
+## rename species to appear as last species
+df$species[df$species == "Diversity"] <- "AAA_Diversity"
+df.sum$species[df.sum$species == "Diversity"] <- "AAA_Diversity"
+
+## reverse levels
+df$species <- factor(df$species, levels = rev(sort(unique(df$species))))
+df.sum$species <- factor(df.sum$species, levels = rev(sort(unique(df.sum$species))))
+
 ## plot function
 plot.ce <- function(df, ce, ce.name, facet, df.s, pos, neg, min){
   if(is.null(facet)) facet <- TRUE
@@ -352,34 +381,34 @@ plot.ce <- function(df, ce, ce.name, facet, df.s, pos, neg, min){
   g <- list()
   
   g[[1]] <- ggplot(df) +
-    geom_vline(xintercept = 0, lty = "dashed", lwd = 3) +
+    geom_vline(xintercept = 0, lty = "dashed", lwd = 0.5) +
     stat_slab(aes(x = ce, y = species, fill = radius, color = radius),
-              alpha = 0.7, height = 2 #, slab_color = "grey30"
+              alpha = 0.7, height = 2, slab_linewidth = 0.35 #, slab_color = "grey30"
     ) +
 
     geom_text(aes(y = species, x = ifelse(BayesP > 0.95, pos-0.06, neg-0.06), 
-                  label = star2, color = radius), alpha = 0.8, size = 35,
+                  label = star2, color = radius), alpha = 0.8, size = 3,
               position = position_nudge(y = 0.3),
               data = df.s[df.s$radius == "0.5",], fontface = "plain") +
     geom_text(aes(y = species, x = ifelse(BayesP > 0.95, pos, neg), 
-                  label = star2, color = radius), alpha = 0.8, size = 35,
+                  label = star2, color = radius), alpha = 0.8, size = 3,
               position = position_nudge(y = 0.3),
               data = df.s[df.s$radius == "0.75",], fontface = "plain") +
     geom_text(aes(y = species, x = ifelse(BayesP > 0.95, pos+0.06, neg+0.06), 
-                  label = star2, color = radius), alpha = 0.8, size = 35,
+                  label = star2, color = radius), alpha = 0.8, size = 3,
               position = position_nudge(y = 0.3),
               data = df.s[df.s$radius == "1",], fontface = "plain") +
 
     geom_text(aes(y = species, x = ifelse(BayesP > 0.975, pos-0.06, neg-0.06), 
-                  label = star, color = radius), alpha = 1, size = 40,
+                  label = star, color = radius), alpha = 1, size = 4,
               position = position_nudge(y = 0.3),
               data = df.s[df.s$radius == "0.5",], fontface = "bold") +
     geom_text(aes(y = species, x = ifelse(BayesP > 0.975, pos, neg), 
-                  label = star, color = radius), alpha = 1, size = 40,
+                  label = star, color = radius), alpha = 1, size = 4,
               position = position_nudge(y = 0.3),
               data = df.s[df.s$radius == "0.75",], fontface = "bold") +
     geom_text(aes(y = species, x = ifelse(BayesP > 0.975, pos+0.06, neg+0.06), 
-                  label = star, color = radius), alpha = 1, size = 40,
+                  label = star, color = radius), alpha = 1, size = 4,
               position = position_nudge(y = 0.3),
               data = df.s[df.s$radius == "1",], fontface = "bold") +
     # geom_text(aes(y = species, x = neg, color = radius, group = radius),
@@ -392,7 +421,7 @@ plot.ce <- function(df, ce, ce.name, facet, df.s, pos, neg, min){
     # xlim(quantile(unlist(df[,cols]), probs = 0.025), quantile(unlist(df[,cols]), probs = 0.975)) +
     xlim(min, min+2.2) + # -2.5, 0.75
     # scale_y_reverse(limits = rev(levels(df$species))) +
-    theme_minimal(base_size = 7*bs) +
+    theme_minimal(base_size = 0.6*bs) +
     # theme(legend.position = "none",
     #       axis.title = element_blank())
     theme(legend.position = "none")
@@ -422,7 +451,7 @@ plot.ce <- function(df, ce, ce.name, facet, df.s, pos, neg, min){
     xlim(min, min+2.2) + # -2.5, 0.75
     scale_y_continuous(breaks = c(-3, 0, 3), labels = c(" ", "Mönchsgrasmücke", " ")) +
     ylab("species") +
-    theme_classic(base_size = 7*bs)  + 
+    theme_classic(base_size = 0.6*bs)  + 
     theme(axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
           axis.title.x = element_blank(),
@@ -441,13 +470,6 @@ plot.ce <- function(df, ce, ce.name, facet, df.s, pos, neg, min){
   
 }
 
-## rename species to appear as last species
-df$species[df$species == "Diversity"] <- "AAA_Diversity"
-df.sum$species[df.sum$species == "Diversity"] <- "AAA_Diversity"
-
-## reverse levels
-df$species <- factor(df$species, levels = rev(sort(unique(df$species))))
-df.sum$species <- factor(df.sum$species, levels = rev(sort(unique(df.sum$species))))
 
 ## exclude some trait groups
 # df <- df[df$model != "Diet",]
@@ -474,12 +496,14 @@ g4 <- plot.ce(df = df[df$model %in% c("Diversity", "species"),], df.s = df.sum,
 
 
 SpecDiv <- g1[[1]] + g2[[1]] + g3[[1]] + g4[[1]] + plot_layout(nrow = 1)
-png(paste0("./graphs/prefig/Radius_SpecDiv.png"), height = 3200, width = 6000)
+#png(paste0("./graphs/prefig/Radius_SpecDiv.png"), height = 3200, width = 6000)
+jpeg("./graphs/prefig/Radius_SpecDiv.jpeg", height = 90, width = 190, units = "mm", quality = 100, res = 1000)
 SpecDiv
 dev.off()
 
 SpecDiv <- g1[[2]] + g2[[2]] + g3[[2]] + g4[[2]] + plot_layout(nrow = 1)
-png(paste0("./graphs/prefig/Radius_SpecDiv_leg.png"), height = 500, width = 6000)
+#png(paste0("./graphs/prefig/Radius_SpecDiv_leg.png"), height = 500, width = 6000)
+jpeg("./graphs/prefig/Radius_SpecDiv_leg.jpeg", height = 25, width = 190, units = "mm", quality = 100, res = 1000)
 SpecDiv
 dev.off()
 
@@ -502,11 +526,13 @@ g4 <- plot.ce(df = df[!df$model %in% c("Diversity", "species"),], df.s = df.sum,
 
 
 Trait <- g1[[1]] + g2[[1]] + g3[[1]] + g4[[1]] + plot_layout(nrow = 1)
-png(paste0("./graphs/prefig/Radius_Trait.png"), height = 3200, width = 6000)
+#png(paste0("./graphs/prefig/Radius_Trait.png"), height = 3200, width = 6000)
+jpeg("./graphs/prefig/Radius_Trait.jpeg", height = 90, width = 190, units = "mm", quality = 100, res = 1000)
 Trait
 dev.off()
 
 Trait <- g1[[2]] + g2[[2]] + g3[[2]] + g4[[2]] + plot_layout(nrow = 1)
-png(paste0("./graphs/prefig/Radius_Trait_leg.png"), height = 500, width = 6000)
+#png(paste0("./graphs/prefig/Radius_Trait_leg.png"), height = 500, width = 6000)
+jpeg("./graphs/prefig/Radius_Trait_leg.jpeg", height = 25, width = 190, units = "mm", quality = 100, res = 1000)
 Trait
 dev.off()

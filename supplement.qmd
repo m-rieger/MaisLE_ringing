@@ -362,17 +362,28 @@ plot2(x = "woodS_1000m", xlab = woodS1000, y = "weed_p", ylab = weed)
 ```{r, results='asis', echo = F}
 dat.spec <- read.csv("./output/data_Traits.csv", encoding = "latin1")
 dat.spec <- dat.spec[order(dat.spec$species_sci), ]
-dat.spec <- select(dat.spec, -"species")
-colnames(dat.spec) <- c("scientific", "english", "migration", "habitat", "habitat density", "primary lifestyle", "Red List GER", "Trophic Niche")
 
-kbl(dat.spec, caption = "Overview of species trapped in maize fields and their attribution to different trait groups. <em>Habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened</em>",     
+dat.mod <- read.csv("./output/data.csv", encoding = "latin1")
+dat.mod <- dat.mod %>% group_by(species) %>%
+  summarize(nInd = sum(NInd_pd), .groups = "drop")
+dat.mod$Ind_prop <- round(dat.mod$nInd/sum(dat.mod$nInd)*100, 1)
+
+dat.mod$nInd_prop <- paste0(dat.mod$nInd, " (", dat.mod$Ind_prop, "%)")
+
+## merge with dat.spec
+dat.spec <- left_join(dat.spec, dat.mod[, c("species", "nInd_prop")], by = "species")
+dat.spec <- dat.spec[, c("species_sci", "species_eng", "nInd_prop", "Migration", "Habitat", "Habitat.Density", "Primary.Lifestyle", "Trophic.Niche", "RedList_DE")]
+
+colnames(dat.spec) <- c("scientific", "english", "individuals", "migration", "habitat", "habitat density", "primary lifestyle", "Trophic Niche", "Red List GER")
+
+kbl(dat.spec, caption = "Overview of species trapped in maize fields, the number of trapped birds (including recaptures, share of total captures across all species given in brackets) and their attribution to different trait groups. <em>Habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened</em>",     
     row.names = F, escape = FALSE) %>%
   kable_styling(full_width = FALSE, position = "left") %>%
   scroll_box(width = "900px", height = "750px") %>%
 
   row_spec(0:nrow(dat.spec), extra_css = "font-size:14px;") %>%
 
-  add_header_above(c("species name" = 2, "trait" = 6)) %>%
+  add_header_above(c("species name" = 2, " " = 1, "trait" = 6)) %>%
   row_spec(which(1:nrow(dat.spec)%%2!=1),
            background = "#CCCCCC") %>%
   row_spec(0, extra_css = "border-bottom: 1px solid black;", background = "#CCCCCC") %>%
