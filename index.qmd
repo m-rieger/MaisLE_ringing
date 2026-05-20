@@ -343,7 +343,7 @@ recap.rate <- round(recap/ind.sum*100, 1)
 ```
 
 We trapped a total of `r ind.sum` birds of `r spec.sum` species, including `r recap` recaptured birds of 27 species (recapture rate of `r recap.rate`%).
-The three most abundant species were Blue Tit with `r ind.bt` individuals (`r prop.bt`% of all trapped birds), Chiffchaff with `r ind.cc` individuals (`r prop.cc`%), and Great Tit with `r ind.gt` individuals (`r prop.gt`%).
+The three most abundant species were Blue Tit with `r ind.bt` individuals (`r prop.bt`% of all trapped birds), Chiffchaff with `r ind.cc` individuals (`r prop.cc`%), and Great Tit with `r ind.gt` individuals (`r prop.gt`%) (see also Supplement section 1.5 for further individual numbers).
 
 ## Phenology
 

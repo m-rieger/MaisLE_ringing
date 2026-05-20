@@ -1,6 +1,37 @@
 ---
-title: Supplementary material
+title: "Supplementary material of 'Maize fields as post-breeding habitat for songbirds: influence of landscape composition, field margins, and weed infestation'"
 date: last-modified
+author:
+  - name: Mirjam R. Rieger
+    email: mrieger@posteo.de
+    orcid: 0000-0002-7404-6023
+    corresponding: true
+    affiliations: 
+      - id: HFR
+        name: Hochschule für Forstwirtschaft Rottenburg
+        city: Schadenweilerhof, 72108 Rottenburg am Neckar
+        country: Germany
+  - name: Wieland Heim
+    email: wieland.heim@uol.de
+    orcid: 0000-0002-3262-2491
+    affiliations:
+      - id: UOL
+        name: Carl von Ossietzky Universität Oldenburg, Institut für Biologie und Umweltwissenschaften
+        city: Ammerländer Heerstraße 114-118, 26129 Oldenburg
+        country: Germany  
+  - name: László Kövér
+    email: koverl@agr.unideb.hu
+    orcid: 0000-0001-5368-3691
+    affiliations:
+      - id: UD
+        name: University of Debrecen, Department of Nature Conservation Zoology and Game Management
+        city: Boszormenyi str. 138, 4032 Debrecen
+        country: Hungary  
+  - name: Thomas K. Gottschalk
+    email: gottschalk@hs-rottenburg.de
+    orcid: 0000-0002-8951-386X
+    affiliations:
+      - ref: HFR
 execute:
   echo: false
 format: 
