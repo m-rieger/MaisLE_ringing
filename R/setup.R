@@ -16,8 +16,8 @@ source("./R/utils.R")
 ## model name to load stan model:
 modnL    <- c("zinb_Dmat_oH", "zinb_Dmat_oH", "pois_Dmat_oH_NSpec")
 
-RUN      <- T # if TRUE model is run, if FALSE model is read in
-PREDICT  <- T # if TRUE predictions are run, if FALSE predictions are read in
+RUN      <- F # if TRUE model is run, if FALSE model is read in
+PREDICT  <- F # if TRUE predictions are run, if FALSE predictions are read in
 
 LANG     <- "EN" # Language in German "GER" or English "EN"
 

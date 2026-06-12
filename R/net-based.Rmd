@@ -382,29 +382,29 @@ print(fit$summary(pars), n = nrow(fit$summary(pars))+10)
 <div class="scroll5">
 ### areas
 ```{r ppc1, echo = F, fig.dim = c(9, 5)}
-for(p in pars) {
-  print(mcmc_areas(fit$draws(p),
-                   prob = 0.80,
-                   prob_outer = 0.95))
-}
+# for(p in pars) {
+#   print(mcmc_areas(fit$draws(p),
+#                    prob = 0.80,
+#                    prob_outer = 0.95))
+# }
 ```
 </div>
 
 <div class="scroll5">
 ### dens_overlay
 ```{r ppc2, echo = F, fig.dim = c(9, 5)}
-for(p in pars) {
-  print(mcmc_dens_overlay(fit$draws(p)))
-}
+# for(p in pars) {
+#   print(mcmc_dens_overlay(fit$draws(p)))
+# }
 ```
 </div>
 
 <div class="scroll5">
 ### trace
 ```{r ppc3, echo = F, fig.dim = c(9, 5)}
-for(p in pars) {
-  print(mcmc_trace(fit$draws(p)))
-}
+# for(p in pars) {
+#   print(mcmc_trace(fit$draws(p)))
+# }
 ```
 </div>
 
@@ -422,6 +422,8 @@ for(sp in 1:length(Spec.list)) {
   yrep <- get_draws("y_sim")[, which(stan.data$sp == sp)]
 
   print(ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle(Spec.list[sp]))
+  if(type == "m1") g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle(dat.spec$species_eng[dat.spec$species == Spec.list[sp]])
+  if(type != "m1") g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle(Spec.list[sp])
 
   gmean  <- ppc_stat(y, yrep, stat = "mean") +
     ggtitle("mean") + theme(legend.position = "none")
@@ -433,6 +435,11 @@ for(sp in 1:length(Spec.list)) {
     ggtitle("max") + theme(legend.position = "none")
 
   grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
+  
+  ggsave(paste0("../graphs/prefig/PPC_", type, "_", Spec.list[sp], "_", RAD, "m.jpeg"), 
+         plot = grid.arrange(g1, arrangeGrob(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2), nrow = 1), 
+         width = 9, height = 4, newpage = F)
+
 }
 ```
 </div>

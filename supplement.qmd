@@ -42,33 +42,28 @@ toc-depth: 2
 toc-location: left
 number-sections: true
 number-depth: 3
-include-in-header:
-  - text: |
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-      $(document).ready(function () {
-        $("input.hideshow").each(function () {
-          this.value = '< hide table';
-          $(this).on("click", function () {
-            let target = $(this).nextAll("table").first();  // find the next table
-            if (target.css("display") === "none") {
-              target.show();
-              this.value = '< hide table';
-            } else {
-              target.hide();
-              this.value = '> show table';
-            }
-          });
-        });
-      });
-      </script>
 
 ---
+
+<style>
+.scroll5 {
+    height: 500px;
+    overflow-y: scroll;
+}
+</style>
+
+<style>
+.scroll4 {
+    height: 400px;
+    overflow-y: scroll;
+}
+</style>
 
 ```{r setup, include = FALSE}
 library(kableExtra)
 library(tidyverse)
 library(plotly)
+library(glue)
 
 source("./R/utils.R")
 
@@ -424,9 +419,385 @@ kbl(dat.spec, caption = "Overview of species trapped in maize fields, the number
 
 ```
 
+## Posterior predictive checks
+
+```{r}
+dat.spec <- read.csv("./output/data_Traits.csv", encoding = "latin1")
+```
+
+
+::: {.panel-tabset}
+
+### species
+
+
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+spec.list <- c("Blaumeise", "Zilpzalp", "Kohlmeise", "Teichrohrsänger", 
+                "Rotkehlchen", "Buchfink", "Fitis", "Feldsperling", "Mönchsgrasmücke", 
+                "Goldammer", "Rohrammer", "Sumpfrohrsänger", "Heckenbraunelle")
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m1_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m1_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m1_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+
+### richness
+
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+spec.list <- c("richness")
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m3_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m3_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m3_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+### habitat
+
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+trait <- "Habitat"
+spec.list <- sort(unique(dat.spec[, trait]))
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+
+### habitat density
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+trait <- "Habitat.Density"
+spec.list <- sort(unique(dat.spec[, trait]))
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+
+### migration
+
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+trait <- "Migration"
+spec.list <- sort(unique(dat.spec[, trait]))
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+### lifestyle
+
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+trait <- "Primary.Lifestyle"
+spec.list <- sort(unique(dat.spec[, trait]))
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+### trophic niche
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+trait <- "Trophic.Niche"
+spec.list <- sort(unique(dat.spec[, trait]))
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+
+### Red List GER
+:::: {.panel-tabset}
+
+
+#### 500
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 500
+trait <- "RedList_DE"
+spec.list <- sort(unique(dat.spec[, trait]))
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+
+```
+</div>
+
+#### 750
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 750
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+#### 1000
+
+<div class="scroll4">
+
+```{r, results='asis'}
+r <- 1000
+
+for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", sp, "_", r, "m.jpeg"), ")\n")
+ 
+```
+</div>
+
+::::
+
+
+:::
+
+These figures display posterior predictive checks of the response variable bird abundance (for species and trait groups) or species richness (for richness). The left plot shows the distribution of the raw data (dark blue) as well as eight simulations of the dataset based on the respective model (light blue). The right panel shows the ability of the model to reproduce several distributional characteristics of the response variable (dark blue = raw data, light blue = simulated raw data), namely mean, standard deviation (sd), proportion of zero counts (propZ) and maximum values (max). _Reference for habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Reference for Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened._
 
 
 # Results
+
 
 ```{r}
 dat.spec  <- read.csv("./data/spec_info.csv", fileEncoding = "latin1")[, c("species", "species_eng")]
@@ -639,7 +1010,7 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ```
 ::::
 
-## diversity
+## richness
 
 :::: {.panel-tabset}
 
@@ -945,5 +1316,5 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 
 :::
 
-These figures display the predicted bird densities (for species and trait groups) or species diversity (for diversity) for different covariates (proportion of maize, proportion of AST, distance to field margin, weed infestation, decade of the year). The used reference radius is 0.5 km. When predicting for one covariate, other covariates were set to their mean values. The figures are interactive, so you can remove groups by selecting them in the legend or hover across lines to show exact values. _Reference for habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Reference for Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened._
+These figures display the predicted bird densities (for species and trait groups) or species richness (for richness) for different covariates (proportion of maize, proportion of AST, distance to field margin, weed infestation, decade of the year). The used reference radius is 0.5 km. When predicting for one covariate, other covariates were set to their mean values. The figures are interactive, so you can remove groups by selecting them in the legend or hover across lines to show exact values. _Reference for habitat density levels: 1 = dense, 2 = semi-open, 3 = open. Reference for Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened._
 

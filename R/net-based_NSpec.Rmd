@@ -338,6 +338,7 @@ y    <- stan.data$y
 yrep <- get_draws("y_sim")
 
 print(ppc_hist(y, yrep[runif(8, 1, nsim),]))
+g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle("species richness")
 
 gmean  <- ppc_stat(y, yrep, stat = "mean") +
   ggtitle("mean") + theme(legend.position = "none")
@@ -349,6 +350,11 @@ gmax   <- ppc_stat(y, yrep, stat = "max") +
   ggtitle("max") + theme(legend.position = "none")
 
 grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
+ggsave(paste0("../graphs/prefig/PPC_m3_richness_", RAD, "m.jpeg"), 
+       plot = grid.arrange(g1, arrangeGrob(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2),
+                    nrow = 1), 
+       width = 9, height = 4, newpage = F)
+
 
 ```
 </div>

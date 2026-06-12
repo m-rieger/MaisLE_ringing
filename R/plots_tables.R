@@ -253,7 +253,7 @@ plot3 <- function(preds = pp, sims = ff, x = NULL, y = "fit",
       breaks = x.val
     ))
   
-  if(spec == "species diversity") g <- g + theme(legend.position = "none")
+  if(spec == "species richness") g <- g + theme(legend.position = "none")
   if(spec %in% c("migration", "trophic niche")) g <- g + theme(legend.position = c(0.3, 0.85), 
                                          legend.box.background = element_rect(colour = "grey30"),
                                          legend.key.size = unit(0.2, 'cm'), #change legend key size
@@ -277,10 +277,10 @@ g2 <- plot3(preds = pp.food[pp.food$pred == "jday",], sims = ff.food[ff.food$pre
             xlab = "decade of the year [10-day interval]", x = "julian_day",
             ylab = "density [ind. per 1000 hm²]", basesize = bs)
 
-spec <- "species diversity"
+spec <- "species richness"
 g3 <- plot3(preds = pp.sD[pp.sD$pred == "jday",], sims = ff.sD[ff.sD$pred == "jday",], 
       xlab = "decade of the year [10-day interval]", x = "julian_day",
-      ylab = "species diversity [number of species]", basesize = bs)
+      ylab = "species richness [number of species]", basesize = bs)
 
 Pheno <- g1 + g2 + g3 + plot_layout(nrow = 1); Pheno
 # png("./graphs/Results_Pheno.png", height = 1000, width = 2400)
