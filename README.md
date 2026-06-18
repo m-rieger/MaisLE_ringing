@@ -1,5 +1,5 @@
 # MaisLE_ringing
-Repository with data, code and manuscript to reproduce results from Rieger, M.R., Heim, W., Kövér, L. and Gottschalk, T.K. (2026) Maize fields as post-breeding habitat for songbirds: influence of landscape structure, field margins, and weed infestation (add link to preprint []())
+Repository with data, code and manuscript to reproduce results from Rieger, M.R., Heim, W., Kövér, L. and Gottschalk, T.K. (2026) Maize fields as post-breeding habitat for songbirds: influence of landscape composition, field margins, and weed infestation (add link to preprint []())
 
 ## abstract
 

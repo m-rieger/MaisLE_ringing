@@ -382,29 +382,29 @@ print(fit$summary(pars), n = nrow(fit$summary(pars))+10)
 <div class="scroll5">
 ### areas
 ```{r ppc1, echo = F, fig.dim = c(9, 5)}
-# for(p in pars) {
-#   print(mcmc_areas(fit$draws(p),
-#                    prob = 0.80,
-#                    prob_outer = 0.95))
-# }
+for(p in pars) {
+  print(mcmc_areas(fit$draws(p),
+                   prob = 0.80,
+                   prob_outer = 0.95))
+}
 ```
 </div>
 
 <div class="scroll5">
 ### dens_overlay
 ```{r ppc2, echo = F, fig.dim = c(9, 5)}
-# for(p in pars) {
-#   print(mcmc_dens_overlay(fit$draws(p)))
-# }
+for(p in pars) {
+  print(mcmc_dens_overlay(fit$draws(p)))
+}
 ```
 </div>
 
 <div class="scroll5">
 ### trace
 ```{r ppc3, echo = F, fig.dim = c(9, 5)}
-# for(p in pars) {
-#   print(mcmc_trace(fit$draws(p)))
-# }
+for(p in pars) {
+  print(mcmc_trace(fit$draws(p)))
+}
 ```
 </div>
 
@@ -413,7 +413,7 @@ print(fit$summary(pars), n = nrow(fit$summary(pars))+10)
 
 <div class="scroll5">
 ### NInd
-```{r pps1, echo = F, warning = F, message = F, fig.dim = c(4.5, 4)}
+```{r pps1, echo = F, warning = F, message = F, fig.dim = c(9, 4)}
 modsims <- fit$draws("y_sim", format = "df")
 
 for(sp in 1:length(Spec.list)) {
@@ -421,49 +421,82 @@ for(sp in 1:length(Spec.list)) {
 
   yrep <- get_draws("y_sim")[, which(stan.data$sp == sp)]
 
-  print(ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle(Spec.list[sp]))
-  if(type == "m1") g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle(dat.spec$species_eng[dat.spec$species == Spec.list[sp]])
-  if(type != "m1") g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle(Spec.list[sp])
+  if(type == "m1") {g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + 
+    theme_light(base_size = 7) + 
+    ggtitle(dat.spec$species_eng[dat.spec$species == Spec.list[sp]]) +
+    theme(legend.key.size = unit(0.2, 'cm'), 
+          legend.position = c(0.875, 0.875),
+          legend.title=element_blank(),
+          strip.background = element_blank(),
+          strip.text.x = element_blank())}
+  if(type != "m1") {g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + 
+    theme_light(base_size = 7) + 
+    ggtitle(Spec.list[sp]) +
+    theme(legend.key.size = unit(0.2, 'cm'), 
+          legend.position = c(0.875, 0.875),
+          legend.title=element_blank(),
+          strip.background = element_blank(),
+          strip.text.x = element_blank())}
 
   gmean  <- ppc_stat(y, yrep, stat = "mean") +
-    ggtitle("mean") + theme(legend.position = "none")
+    labs(subtitle = "mean") + theme_light(base_size = 6) + theme(legend.position = "none")
   gsd    <- ppc_stat(y, yrep, stat = "sd") +
-    ggtitle("sd") + theme(legend.position = "none")
+    labs(subtitle = "sd") + theme_light(base_size = 6) + theme(legend.position = "none")
   gpropZ <- ppc_stat(y, yrep, stat = "prop_zero") +
-    ggtitle("propZ") + theme(legend.position = "none")
+    labs(subtitle = "propZ") + theme_light(base_size = 6) + theme(legend.position = "none")
   gmax   <- ppc_stat(y, yrep, stat = "max") +
-    ggtitle("max") + theme(legend.position = "none")
+    labs(subtitle = "max") + theme_light(base_size = 6) + theme(legend.position = "none")
 
-  grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
+  # grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
   
   ggsave(paste0("../graphs/prefig/PPC_", type, "_", Spec.list[sp], "_", RAD, "m.jpeg"), 
-         plot = grid.arrange(g1, arrangeGrob(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2), nrow = 1), 
-         width = 9, height = 4, newpage = F)
+         plot = grid.arrange(g1, arrangeGrob(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2), 
+                             nrow = 1), 
+         width = 4, height = 2, scale = 1)
 
-}
+c}
 ```
 </div>
 
 <div class="scroll5">
 ### density
-```{r pps2, echo = F, warning = F, message = F, fig.dim = c(4.5, 4)}
+```{r pps2, echo = F, warning = F, message = F, fig.dim = c(9, 4)}
 
 for(sp in 1:length(Spec.list)) {
   y    <- stan.data$y[which(stan.data$sp == sp)]/ stan.data$effort[which(stan.data$sp == sp)]
   yrep <- get_draws("y_sim")[, which(stan.data$sp == sp)]/ stan.data$effort[which(stan.data$sp == sp)][col(yrep)]
 
-  print(ppc_hist(y, yrep[runif(8, 1, 100),]) + ggtitle(Spec.list[sp]))
+  if(type == "m1") {g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + 
+    theme_light(base_size = 7) + 
+    ggtitle(dat.spec$species_eng[dat.spec$species == Spec.list[sp]]) +
+    theme(legend.key.size = unit(0.2, 'cm'), 
+          legend.position = c(0.875, 0.875),
+          legend.title=element_blank(),
+          strip.background = element_blank(),
+          strip.text.x = element_blank())}
+  if(type != "m1") {g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + 
+    theme_light(base_size = 7) + 
+    ggtitle(Spec.list[sp]) +
+    theme(legend.key.size = unit(0.2, 'cm'), 
+          legend.position = c(0.875, 0.875),
+          legend.title=element_blank(),
+          strip.background = element_blank(),
+          strip.text.x = element_blank())}
 
   gmean  <- ppc_stat(y, yrep, stat = "mean") +
-    ggtitle("mean") + theme(legend.position = "none")
+    labs(subtitle = "mean") + theme_light(base_size = 6) + theme(legend.position = "none")
   gsd    <- ppc_stat(y, yrep, stat = "sd") +
-    ggtitle("sd") + theme(legend.position = "none")
+    labs(subtitle = "sd") + theme_light(base_size = 6) + theme(legend.position = "none")
   gpropZ <- ppc_stat(y, yrep, stat = "prop_zero") +
-    ggtitle("propZ") + theme(legend.position = "none")
+    labs(subtitle = "propZ") + theme_light(base_size = 6) + theme(legend.position = "none")
   gmax   <- ppc_stat(y, yrep, stat = "max") +
-    ggtitle("max") + theme(legend.position = "none")
+    labs(subtitle = "max") + theme_light(base_size = 6) + theme(legend.position = "none")
 
-  grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
+
+  # grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
+  
+  grid.arrange(g1, arrangeGrob(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2), 
+                             nrow = 1)
 
 }
 ```

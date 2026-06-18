@@ -434,7 +434,7 @@ dat.spec <- read.csv("./output/data_Traits.csv", encoding = "latin1")
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -449,7 +449,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m1_", sp, "_", r, "
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -461,7 +461,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m1_", sp, "_", r, "
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -481,7 +481,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m1_", sp, "_", r, "
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -494,7 +494,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m3_", sp, "_", r, "
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -506,7 +506,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m3_", sp, "_", r, "
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -525,7 +525,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m3_", sp, "_", r, "
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -539,7 +539,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -551,7 +551,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -570,7 +570,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -584,7 +584,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -596,7 +596,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -616,7 +616,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -630,7 +630,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -642,7 +642,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -661,7 +661,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -675,7 +675,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -687,7 +687,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -705,7 +705,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -719,7 +719,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -731,7 +731,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -750,7 +750,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 :::: {.panel-tabset}
 
 
-#### 500
+#### 0.5 km
 
 <div class="scroll4">
 
@@ -764,7 +764,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 750
+#### 0.75 km
 
 <div class="scroll4">
 
@@ -776,7 +776,7 @@ for(sp in spec.list) cat("![](", paste0("./graphs/prefig/PPC_m2_", trait, "_", s
 ```
 </div>
 
-#### 1000
+#### 1 km
 
 <div class="scroll4">
 
@@ -797,6 +797,260 @@ These figures display posterior predictive checks of the response variable bird 
 
 
 # Results
+
+
+
+## Coefficient estimates
+
+```{r}
+dat.spec <- read.csv("./output/data_Traits.csv", encoding = "latin1")
+dat.spec <- dat.spec[order(dat.spec$species_sci), ]
+
+df.coef <- read.csv("./graphs/prefig/Coefficients.csv")
+
+df.coef <- left_join(df.coef, dat.spec[, c("species", "species_eng")], by = "species")
+
+df.coef$species[!is.na(df.coef$species_eng)] <- df.coef$species_eng[!is.na(df.coef$species_eng)]
+
+coefs <- data.frame("coefficient" = 
+                      c("intercept", "weed", "distance", "maize", "AST",   "decade (1st poly)", "decade (2nd poly)"),
+                    "coef" = 
+                      c("y2016",     "weed", "dist",     "maize", "woodS", "jday1",             "jday2"))
+
+df.coef <- left_join(df.coef, coefs, by = "coef")
+
+df.coef <- df.coef[, c("model", "radius", "species", "coefficient", "median", "lwr", "upr", "BayesP")]
+colnames(df.coef) <- c("model", "radius", "species", "coefficient", "median", "lwr", "upr", "P(β>0)")
+
+df.coef <- df.coef %>% arrange(species)
+
+df.coef[, 5:8] <- round(df.coef[, 5:8], 2)
+
+table1 <- function(model, rad){
+  
+  tab1 <- df.coef[df.coef$model == model & df.coef$radius == rad, 3:8]
+  nspec <- length(unique(tab1$species))
+  n <- 0
+  lines <- NULL
+  for(i in 1:nspec) {
+    n <- n + 7
+    lines <- c(lines, n)
+  }
+
+  tab.cap <- "Coefficient estimates (median and 95% CrI (lwr, upr)) of main predictors per trait-group. P(β>0) is the Bayesian posterior probability of the coefficient to exceed zero. For slopes, values close to 0 indicate a decreasing relationship between abundance and the respective predictor, values close to 1 an increasing relationship."
+  
+  if(model == "species") {
+    tab.cap <- "Coefficient estimates (median and 95% CrI (lwr, upr)) of main predictors per species. P(β>0) is the Bayesian posterior probability of the coefficient to exceed zero. For slopes, values close to 0 indicate a decreasing relationship between abundance and the respective predictor, values close to 1 an increasing relationship."
+    }
+  
+  if(model == "Diversity") {
+    tab1 <- select(tab1, -species)
+    tab.cap <- "Coefficient estimates (median and 95% CrI (lwr, upr)) of main predictors. P(β>0) is the Bayesian posterior probability of the coefficient to exceed zero. For slopes, values close to 0 indicate a decreasing relationship between species richness and the respective predictor, values close to 1 an increasing relationship."
+  }
+  
+  if(model == "Habitat.Density") {
+    tab.cap <- "Coefficient estimates (median and 95% CrI (lwr, upr)) of main predictors per trait-group. P(β>0) is the Bayesian posterior probability of the coefficient to exceed zero. For slopes, values close to 0 indicate a decreasing relationship between abundance and the respective predictor, values close to 1 an increasing relationship. <em>Habitat density levels: 1 = dense, 2 = semi-open, 3 = open.</em>"
+  }
+  
+  if(model == "RedList_DE") {
+    tab.cap <- "Coefficient estimates (median and 95% CrI (lwr, upr)) of main predictors per trait-group. P(β>0) is the Bayesian posterior probability of the coefficient to exceed zero. For slopes, values close to 0 indicate a decreasing relationship between abundance and the respective predictor, values close to 1 an increasing relationship. <em>Red List categories: * = least concern, 2 = endangered, 3 = vulnerable, 4 = near threatened.</em>"
+  }
+    
+  tab <- kbl(tab1, caption = tab.cap,     
+      row.names = F, escape = FALSE) %>%
+    kable_styling(full_width = FALSE, position = "left") %>%
+    scroll_box(height = "750px") %>%
+  
+    row_spec(0:nrow(tab1), extra_css = "font-size:14px;") %>%
+  
+    row_spec(0, extra_css = "border-bottom: 1px solid black;", background = "#CCCCCC") %>%
+    row_spec(lines, extra_css = "border-bottom: 1px solid black;")
+  
+  return(tab)
+  
+}
+
+```
+
+::: {.panel-tabset}
+
+### species
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "species"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+### richness
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "Diversity"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+### habitat
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "Habitat"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+### habitat density
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "Habitat.Density"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+### migration
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "Migration"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+### lifestyle
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "Primary.Lifestyle"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+### trophic niche
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "Trophic.Niche"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+### Red List GER
+
+:::: {.panel-tabset}
+
+#### 0.5 km
+```{r}
+model <- "RedList_DE"
+table1(model = model, rad = 0.5)
+```
+
+#### 0.75 km
+```{r}
+table1(model = model, rad = 0.75)
+```
+
+#### 1 km
+```{r}
+table1(model = model, rad = 1)
+```
+
+::::
+
+:::
 
 
 ```{r}
@@ -969,13 +1223,15 @@ plot3_plotly <- function(preds = pp, x = NULL, y = "fit",
 
 ```
 
+## Posterior predictions
+
 ::: {.panel-tabset}
 
-## species
+### species
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[1]]
@@ -983,26 +1239,26 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
            color = "species_eng", c.label = "species")
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
            color = "species_eng", c.label = "species")
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species_eng", c.label = "species")
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species_eng", c.label = "species")
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species_eng", c.label = "species")
@@ -1010,11 +1266,11 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ```
 ::::
 
-## richness
+### richness
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[8]]
@@ -1023,7 +1279,7 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
 
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
@@ -1031,21 +1287,21 @@ plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",],
 
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species", c.label = "species", NSpec = TRUE)
 
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species", c.label = "species", NSpec = TRUE)
 
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species", c.label = "species", NSpec = TRUE)
@@ -1054,11 +1310,11 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ::::
 
 
-## habitat
+### habitat
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[2]]
@@ -1067,7 +1323,7 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
 
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
@@ -1075,21 +1331,21 @@ plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",],
 
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species", c.label = "habitat")
 
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species", c.label = "habitat")
 
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species", c.label = "habitat")
@@ -1097,11 +1353,11 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ```
 ::::
 
-## habitat density
+### habitat density
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[3]]
@@ -1110,7 +1366,7 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
 
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
@@ -1118,21 +1374,21 @@ plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",],
 
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species", c.label = "habitat density")
 
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species", c.label = "habitat density")
 
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species", c.label = "habitat density")
@@ -1140,11 +1396,11 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ```
 ::::
 
-## migration
+### migration
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[4]]
@@ -1153,7 +1409,7 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
 
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
@@ -1161,21 +1417,21 @@ plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",],
 
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species", c.label = "migration")
 
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species", c.label = "migration")
 
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species", c.label = "migration")
@@ -1183,11 +1439,11 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ```
 ::::
 
-## lifestyle
+### lifestyle
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[5]]
@@ -1196,7 +1452,7 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
 
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
@@ -1204,21 +1460,21 @@ plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",],
 
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species", c.label = "lifestyle")
 
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species", c.label = "lifestyle")
 
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species", c.label = "lifestyle")
@@ -1226,11 +1482,11 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ```
 ::::
 
-## trophic niche
+### trophic niche
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[7]]
@@ -1239,7 +1495,7 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
 
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
@@ -1247,21 +1503,21 @@ plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",],
 
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species", c.label = "trophic niche")
 
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species", c.label = "trophic niche")
 
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species", c.label = "trophic niche")
@@ -1270,11 +1526,11 @@ plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",],
 ::::
 
 
-## Red List GER
+### Red List GER
 
 :::: {.panel-tabset}
 
-### maize
+#### maize
 
 ```{r}
 tmp <- pp[[6]]
@@ -1283,7 +1539,7 @@ plot3_plotly(x = "maize_p", xlab = maize500, preds = tmp[tmp$pred == "maize",],
 
 ```
 
-### AST
+#### AST
 
 ```{r}
 plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",], 
@@ -1291,21 +1547,21 @@ plot3_plotly(x = "woodS_p", xlab = woodS500, preds = tmp[tmp$pred == "woodS",],
 
 ```
 
-### distance
+#### distance
 ```{r}
 plot3_plotly(x = "distance_m", xlab = dist, preds = tmp[tmp$pred == "dist",], 
            color = "species", c.label = "Red List GER")
 
 ```
 
-### weed
+#### weed
 ```{r}
 plot3_plotly(x = "weed_p", xlab = weed, preds = tmp[tmp$pred == "weed",], 
            color = "species", c.label = "Red List GER")
 
 ```
 
-### decade
+#### decade
 ```{r}
 plot3_plotly(x = "julian_day", xlab = jday, preds = tmp[tmp$pred == "jday",], 
            color = "species", c.label = "Red List GER")

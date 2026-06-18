@@ -330,30 +330,36 @@ for(p in pars) {
 
 <div class="scroll5">
 ### NSpec
-```{r pps1, echo = F, warning = F, message = F, fig.dim = c(4.5, 4)}
+```{r pps1, echo = F, warning = F, message = F, fig.dim = c(9, 4)}
 modsims <- fit$draws("y_sim", format = "df")
 
 y    <- stan.data$y
 
 yrep <- get_draws("y_sim")
 
-print(ppc_hist(y, yrep[runif(8, 1, nsim),]))
-g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) + ggtitle("species richness")
+g1 <- ppc_hist(y, yrep[runif(8, 1, nsim),]) +
+  theme_light(base_size = 7) +
+  ggtitle("species richness") +
+  theme(legend.key.size = unit(0.2, 'cm'),
+        legend.position = c(0.875, 0.875),
+        legend.title=element_blank(),
+        strip.background = element_blank(),
+        strip.text.x = element_blank())
 
 gmean  <- ppc_stat(y, yrep, stat = "mean") +
-  ggtitle("mean") + theme(legend.position = "none")
+  labs(subtitle = "mean") + theme_light(base_size = 6) + theme(legend.position = "none")
 gsd    <- ppc_stat(y, yrep, stat = "sd") +
-  ggtitle("sd") + theme(legend.position = "none")
+  labs(subtitle = "sd") + theme_light(base_size = 6) + theme(legend.position = "none")
 gpropZ <- ppc_stat(y, yrep, stat = "prop_zero") +
-  ggtitle("propZ") + theme(legend.position = "none")
+  labs(subtitle = "propZ") + theme_light(base_size = 6) + theme(legend.position = "none")
 gmax   <- ppc_stat(y, yrep, stat = "max") +
-  ggtitle("max") + theme(legend.position = "none")
+  labs(subtitle = "max") + theme_light(base_size = 6) + theme(legend.position = "none")
 
-grid.arrange(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2)
+
 ggsave(paste0("../graphs/prefig/PPC_m3_richness_", RAD, "m.jpeg"), 
        plot = grid.arrange(g1, arrangeGrob(gmean, gsd, gpropZ, gmax, ncol = 2, nrow = 2),
                     nrow = 1), 
-       width = 9, height = 4, newpage = F)
+       width = 4, height = 2, scale = 1)
 
 
 ```

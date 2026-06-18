@@ -363,6 +363,37 @@ df.sum <- pivot_longer(df.sum, names_to = "coef", values_to = "BayesP", cols = a
 df.sum$robust <- "no"
 df.sum$robust[df.sum$BayesP <= 0.025 | df.sum$BayesP >= 0.975] <- "yes"
 
+## get median
+tmp <- df %>% group_by(species, radius, model) %>%
+  summarize(across(all_of(cols),
+                   ~ median(.x)), .groups = "drop")
+
+# long format
+tmp <- pivot_longer(tmp, names_to = "coef", values_to = "median", cols = all_of(cols))
+df.sum <- left_join(df.sum, tmp, by = c("species", "radius", "model", "coef"))
+
+## get quantile 2.5
+tmp <- df %>% group_by(species, radius, model) %>%
+  summarize(across(all_of(cols),
+                   ~ quantile(.x, prob = 0.025)), .groups = "drop")
+
+# long format
+tmp <- pivot_longer(tmp, names_to = "coef", values_to = "lwr", cols = all_of(cols))
+df.sum <- left_join(df.sum, tmp, by = c("species", "radius", "model", "coef"))
+
+## get quantile 97.5
+tmp <- df %>% group_by(species, radius, model) %>%
+  summarize(across(all_of(cols),
+                   ~ quantile(.x, prob = 0.975)), .groups = "drop")
+
+# long format
+tmp <- pivot_longer(tmp, names_to = "coef", values_to = "upr", cols = all_of(cols))
+df.sum <- left_join(df.sum, tmp, by = c("species", "radius", "model", "coef"))
+
+write.csv(df.sum, "./graphs/prefig/Coefficients.csv", row.names = F)
+
+
+
 ## rename species to appear as last species
 df$species[df$species == "Diversity"] <- "AAA_Diversity"
 df.sum$species[df.sum$species == "Diversity"] <- "AAA_Diversity"
